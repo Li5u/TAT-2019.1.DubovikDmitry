@@ -15,17 +15,24 @@ namespace DEV_1
             SubstringSearcher searcher = new SubstringSearcher();
             if (args.Length == 0)
             {
-                Console.WriteLine("Wrong input!");
+                Console.WriteLine("Must be at least one argument!");
             }
             else
             {
                 for (int i = 0; i < args.Length; i++)
                 {
                     string main_string = args[i];
-                    Console.WriteLine($"Substrings of {main_string}:");
-                    foreach (string substring in searcher.Find(main_string))
+                    if (main_string.Length < 2)
                     {
-                        Console.WriteLine(substring);
+                        Console.WriteLine($"Incorrect string \"{main_string}\"! String lenght must be two or more");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Substrings in \"{main_string}\":");
+                        foreach (string substring in searcher.Find(main_string))
+                        {
+                            Console.WriteLine(substring);
+                        }
                     }
                 }
             }

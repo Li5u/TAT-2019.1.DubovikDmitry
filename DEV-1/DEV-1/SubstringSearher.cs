@@ -14,31 +14,24 @@ namespace DEV_1
         public HashSet<string> Find(string main_string)
         {
             HashSet<string> substrings = new HashSet<string>();
-            if (main_string.Length < 2)
+            for (int i = 0; i < main_string.Length; i++)
             {
-                Console.WriteLine("Wrong input!");
-                return substrings;
-            }
-            else
-            {
-                for (int i = 0; i < main_string.Length; i++)
+                string current_substring = main_string[i].ToString();
+                for (int j = i + 1; j < main_string.Length; j++)
                 {
-                    string current_substring = main_string[i].ToString();
-                    for (int j = i + 1; j < main_string.Length; j++)
+                    if (main_string[j - 1] != main_string[j])
                     {
-                        if (main_string[j - 1] != main_string[j])
-                        {
-                            current_substring += main_string[j];
-                            substrings.Add(current_substring);
-                            //HashSet won't add current_substring if it also exists
-                            continue;
-                        }
-                        else
-                            break;
+                        current_substring += main_string[j];
+                        substrings.Add(current_substring);
+                        //HashSet won't add current_substring if it also exists
+                        continue;
                     }
+                    else
+                        break;
                 }
-                return substrings;
             }
+            return substrings;
+
         }
     }
 }
