@@ -13,10 +13,17 @@ namespace DEV_1
         static void Main(string[] args)
         {
             SubstringSearcher searcher = new SubstringSearcher();
-            string main_string = args[0];
-            foreach (string substring in searcher.Find(main_string))
+            if (args.Length == 0)
             {
-                Console.WriteLine(substring);
+                Console.WriteLine("Wrong input!");
+            }
+            else
+            {
+                string main_string = args[0];
+                foreach (string substring in searcher.Find(main_string))
+                {
+                    Console.WriteLine(substring);
+                }
             }
 
         }
