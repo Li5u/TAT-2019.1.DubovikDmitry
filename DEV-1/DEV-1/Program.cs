@@ -19,10 +19,14 @@ namespace DEV_1
             }
             else
             {
-                string main_string = args[0];
-                foreach (string substring in searcher.Find(main_string))
+                for (int i = 0; i < args.Length; i++)
                 {
-                    Console.WriteLine(substring);
+                    string main_string = args[i];
+                    Console.WriteLine($"Substrings of {main_string}:");
+                    foreach (string substring in searcher.Find(main_string))
+                    {
+                        Console.WriteLine(substring);
+                    }
                 }
             }
 
