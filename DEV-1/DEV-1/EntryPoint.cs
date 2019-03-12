@@ -9,7 +9,7 @@ namespace DEV_1
         /// EntryPoint of program that takes arguments from command line and displays to console
         /// all substrings without consecutive repetitive symbols.
         /// </summary>
-        /// <param name="args">arguments from command line</param>
+        /// <param name="args">Arguments from command line</param>
         static void Main(string[] args)
         {
             try

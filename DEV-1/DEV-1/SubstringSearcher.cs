@@ -11,9 +11,9 @@ namespace DEV_1
     {
         private string recievedString;
         /// <summary>
-        /// The class constructor can find and display substrings without consecutive repetitive symbols.
+        /// The class constructor checks if argument from command line is valid.
         /// </summary>
-        /// <param name="recievedString"></param>
+        /// <param name="recievedString">Argument from command line</param>
         public SubstringSearcher(string recievedString)
         {
             if (recievedString.Length < 2 || recievedString == null)
