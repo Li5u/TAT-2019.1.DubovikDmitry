@@ -5,58 +5,54 @@ using System.Text;
 
 namespace DEV_1
 {   /// <summary>
-    /// Class can find and display substrings without consecutive repetitive symbols
+    /// Class can find and display substrings without consecutive repetitive symbols.
     /// </summary>
     class SubstringSearcher
     {
+        private string recievedString;
         /// <summary>
-        /// This constructor checks if argument from command line is valid  
+        /// The class constructor can find and display substrings without consecutive repetitive symbols.
         /// </summary>
-        private string main_string;
-        public SubstringSearcher(string argument)
+        /// <param name="recievedString"></param>
+        public SubstringSearcher(string recievedString)
         {
-            if (argument.Length < 2 || argument == null)
+            if (recievedString.Length < 2 || recievedString == null)
             {
-                throw new Exception($"Incorrect string \"{argument}\"! String lenght must be more than one symbol");
+                throw new Exception($"Incorrect string \"{recievedString}\"! String lenght must be more than one symbol.");
             }
-            else
-            {
-                main_string = argument;
-            }
+            this.recievedString = recievedString;
         }
 
         /// <summary>
-        /// This method returns HashSet of substrings without consecutive repetitive symbols
+        /// This method returns HashSet of substrings without consecutive repetitive symbols.
         /// </summary>
         public HashSet<string> FindSubstrings()
         {
             HashSet<string> substrings = new HashSet<string>();
-            for (int i = 0; i < main_string.Length; i++)
+            for (int i = 0; i < recievedString.Length; i++)
             {
-                StringBuilder current_substring = new StringBuilder(main_string[i].ToString());
-                for (int j = i + 1; j < main_string.Length; j++)
+                StringBuilder currentSubstring = new StringBuilder(recievedString[i].ToString());
+                for (int j = i + 1; j < recievedString.Length; j++)
                 {
-                    if (main_string[j - 1] != main_string[j])
+                    if (recievedString[j - 1] != recievedString[j])
                     {
-                        current_substring.Append(main_string[j]);
-                        substrings.Add(current_substring.ToString());//HashSet won't add current_substring if it also exists
+                        currentSubstring.Append(recievedString[j]);
+                        //HashSet won't add current_substring if it also exists.
+                        substrings.Add(currentSubstring.ToString());
                         continue;
                     }
-                    else
-                    {
-                        break;
-                    }
+                    break;
                 }
             }
             return substrings;
         }
 
         /// <summary>
-        /// This method displays substrings without consecutive repetitive symbols
+        /// This method displays substrings without consecutive repetitive symbols.
         /// </summary>
         public void DisplaySubstrings(HashSet<string> substrings)
         {
-            Console.WriteLine($"Substrings in \"{main_string}\":");
+            Console.WriteLine($"Substrings in \"{recievedString}\":");
             foreach (string substring in substrings)
             {
                 Console.WriteLine(substring);
