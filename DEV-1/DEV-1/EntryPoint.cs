@@ -6,7 +6,7 @@ namespace DEV_1
     class EntryPoint
     {
         /// <summary>
-        /// Program takes arguments from command line and displays to console
+        /// EntryPoint of program that takes arguments from command line and displays to console
         /// all substrings without consecutive repetitive symbols
         /// </summary>
         /// <param name="args">arguments from command line</param>
@@ -17,11 +17,11 @@ namespace DEV_1
                 SubstringSearcher searcher = new SubstringSearcher(args[0]);
                 searcher.DisplaySubstrings(searcher.FindSubstrings());
             }
-            catch(IndexOutOfRangeException)
+            catch (IndexOutOfRangeException)
             {
                 Console.WriteLine("Must be an argument!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Something were wrong! " + ex.Message);
             }

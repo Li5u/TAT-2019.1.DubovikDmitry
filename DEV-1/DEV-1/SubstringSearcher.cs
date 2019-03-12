@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 
 namespace DEV_1
@@ -8,6 +9,9 @@ namespace DEV_1
     /// </summary>
     class SubstringSearcher
     {
+        /// <summary>
+        /// This constructor checks if argument from command line is valid  
+        /// </summary>
         private string main_string;
         public SubstringSearcher(string argument)
         {
@@ -29,13 +33,13 @@ namespace DEV_1
             HashSet<string> substrings = new HashSet<string>();
             for (int i = 0; i < main_string.Length; i++)
             {
-                string current_substring = main_string[i].ToString();
+                StringBuilder current_substring = new StringBuilder(main_string[i].ToString());
                 for (int j = i + 1; j < main_string.Length; j++)
                 {
                     if (main_string[j - 1] != main_string[j])
                     {
-                        current_substring += main_string[j];
-                        substrings.Add(current_substring);//HashSet won't add current_substring if it also exists
+                        current_substring.Append(main_string[j]);
+                        substrings.Add(current_substring.ToString());//HashSet won't add current_substring if it also exists
                         continue;
                     }
                     else
@@ -53,10 +57,10 @@ namespace DEV_1
         public void DisplaySubstrings(HashSet<string> substrings)
         {
             Console.WriteLine($"Substrings in \"{main_string}\":");
-            foreach(string substring in substrings)
+            foreach (string substring in substrings)
             {
                 Console.WriteLine(substring);
             }
-        }        
+        }
     }
 }
