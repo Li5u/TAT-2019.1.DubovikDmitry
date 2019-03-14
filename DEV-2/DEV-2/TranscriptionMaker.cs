@@ -8,7 +8,8 @@ namespace DEV_2
 {
     class TranscriptionMaker
     {
-        private readonly string[,] vowels = { { "ю", "у", "йу" }, { "я", "а", "йа" }, { "ё", "о", "йо" }, { "е", "э", "йэ" } };
+        private readonly char[] vowels = { 'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и' };
+        private readonly string[,] yoatedVowels = { { "ю", "у", "йу" }, { "я", "а", "йа" }, { "ё", "о", "йо" }, { "е", "э", "йэ" } };
         private readonly char[] consonants = { 'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л', 'м', 'н',
                                                  'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ' };
         private readonly char[] soundless = { 'ь', 'ъ' };
@@ -36,6 +37,7 @@ namespace DEV_2
         {
             ReplaceUnstressedO();
             SoftenConstans();
+            ShowVowelsPronunciation();
             return recievedString;
         }
 
@@ -65,17 +67,46 @@ namespace DEV_2
         {
             for (int i = 1; i < recievedString.Length; i++) 
             {
-                for (int j = 0; j < vowels.GetLength(0); j++)
+                for (int j = 0; j < yoatedVowels.GetLength(0); j++)
                 {
-                    if (consonants.Contains(recievedString[i - 1]) && recievedString[i].ToString() == vowels[j, 0]) 
+                    if (consonants.Contains(recievedString[i - 1]) && recievedString[i].ToString() == yoatedVowels[j, 0]) 
                     {
-                        recievedString.Insert(i, "'", 1);
-                        recievedString.Replace(recievedString[i + 1].ToString(), vowels[j, 1], i + 1, 1);
+                        recievedString.Replace(recievedString[i].ToString(), yoatedVowels[j, 1], i, 1);
+                        recievedString.Insert(i, "'", 1);                      
                         i++;
                     }
+                    /*if(consonants.Contains(recievedString[i - 1]) && recievedString[i] == 'ь')
+                    {
+                        recievedString.Replace('ь', '\'');
+                    }*/
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ShowVowelsPronunciation()
+        {
+            for (int i = 1; i < recievedString.Length; i++)
+            {
+                for (int j = 0; j < yoatedVowels.GetLength(0); j++)
+                {
+                    if (i - 1 == 0 && recievedString[i - 1].ToString() == yoatedVowels[j, 0]) 
+                    {
+                        recievedString.Replace(recievedString[i - 1].ToString(), yoatedVowels[j, 2], i - 1, 1);
+                        i++;
+                    }
+                    if ((vowels.Contains(recievedString[i - 1]) || soundless.Contains(recievedString[i - 1])) && recievedString[i].ToString() == yoatedVowels[j, 0])
+                    {
+                        recievedString.Replace(recievedString[i].ToString(), yoatedVowels[j, 2], i, 1);
+                        i++;
+                    }
+
+                }
+            }
+        }
+
 
 
         /// <summary>
