@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace DEV_2
 {
     class EntryPoint
@@ -14,8 +13,8 @@ namespace DEV_2
         {
             try
             {
-                var converter = new LetterObjectConverter(args[0]);
-                var transcriptionSpecialist = new TranscriptionMaker(converter.ConverStringToLetterObjectList());
+                var converter = new LetterObjectConverter();
+                var transcriptionSpecialist = new TranscriptionMaker(converter.ConverStringToLetterObjectList(args[0]));
                 converter.DisplayTranscription(transcriptionSpecialist.MakeTranscription());
                 
                 

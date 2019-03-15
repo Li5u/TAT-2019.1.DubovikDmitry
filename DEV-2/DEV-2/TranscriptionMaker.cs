@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DEV_2
 {
+    /// <summary>
+    /// This class makes transcription.
+    /// </summary>
     class TranscriptionMaker
     {
         private List<Letter> incertedString;
@@ -13,20 +12,22 @@ namespace DEV_2
         {
             this.incertedString = incertedString;
         }
+
         /// <summary>
         /// This method returns transcription of recieved string.
         /// </summary>
+        /// <returns>Transctription of word</returns>
         public List<Letter> MakeTranscription()
         {
             ReplaceUnstressedO();
-            SoftenConstans();
-            ShowVowelsPronunciation();
-            DeafAndRingingConverter();
+            SoftenConsonants();
+            ShowYotedVowelsPronunciation();
+            VoiceAndDevoise();
             return incertedString;
         }
 
         /// <summary>
-        /// 
+        /// This method replaces unstressed 'o' with 'a'.
         /// </summary>
         private void ReplaceUnstressedO()
         {
@@ -43,9 +44,9 @@ namespace DEV_2
         }
 
         /// <summary>
-        /// 
+        /// This method changes sound of consonant before yoted vowels.
         /// </summary>
-        private void SoftenConstans()
+        private void SoftenConsonants()
         {
             for (int i = 1; i < incertedString.Count; i++) 
             {
@@ -61,9 +62,9 @@ namespace DEV_2
         }
 
         /// <summary>
-        /// 
+        /// This method changes sound of yoted vowels after another vowels.
         /// </summary>
-        private void ShowVowelsPronunciation()
+        private void ShowYotedVowelsPronunciation()
         {
             for (int i = 1; i < incertedString.Count; i++)
             {
@@ -84,7 +85,10 @@ namespace DEV_2
             }
         }
 
-        private void DeafAndRingingConverter()
+        /// <summary>
+        /// This method changes sound of deaf and ringing consonats.
+        /// </summary>
+        private void VoiceAndDevoise()
         {
             for (int i = 1; i < incertedString.Count; i++)
             {

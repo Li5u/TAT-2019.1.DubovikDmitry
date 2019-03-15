@@ -2,12 +2,20 @@
 
 namespace DEV_2
 {
+    /// <summary>
+    /// This class keeps information about consonant letters.
+    /// </summary>
     class Consonant
     {
         public bool isRinging = false;
         public bool isDeaf = false;
         public string pair;
 
+        /// <summary>
+        /// The class constructor verifies consonant letter with his base 
+        /// and after that sets letter fields.
+        /// </summary>
+        /// <param name="letter"></param>
         public Consonant(char letter)
         {
             string[,] pairedConsonant = { { "б", "п" }, { "в", "ф" }, { "г", "к" }, { "д", "т" }, { "ж", "ш" }, { "з", "с" } };

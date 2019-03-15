@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace DEV_2
 {
+    /// <summary>
+    /// This class keeps all information about letters.
+    /// </summary>
     class Letter
     {
         public readonly string value;
@@ -13,6 +16,11 @@ namespace DEV_2
         public Vowel vowelType = null;
         public Consonant consontantType = null;
 
+        /// <summary>
+        /// The class constructor verifies letter with his base 
+        /// and after that sets letter fields.
+        /// </summary>
+        /// <param name="letter"></param>
         public Letter(char letter)
         {
             string[] vowels = { "а", "о", "у", "ы", "э", "я", "е", "ё", "ю", "и" };

@@ -1,12 +1,23 @@
-﻿
-namespace DEV_2
+﻿namespace DEV_2
 {
+    /// <summary>
+    /// This class keeps information about vowels letters.
+    /// </summary>
+    /// <remarks>
+    /// Stressed vowels must be in upper registry.
+    /// </remarks>
     class Vowel
     {
-        public bool isYoated = false;
+        public bool isYoated = false; //'а','я','е','ё' are yoted.
         public bool isStressedVovel = false;
         public string afterConsonantSound;
         public string afterVowelSound;
+
+        /// <summary>
+        /// The class constructor verifies vowel letter with his base 
+        /// and after that sets letter fields.
+        /// </summary>
+        /// <param name="letter"></param>
         public Vowel(char letter)
         {
             string[,] yoatedVowels = { { "ю", "у", "йу" }, { "я", "а", "йа" }, { "ё", "о", "йо" }, { "е", "э", "йэ" } };
