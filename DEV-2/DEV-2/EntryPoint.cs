@@ -14,9 +14,11 @@ namespace DEV_2
         {
             try
             {
-                var searcher = new TranscriptionMaker(args[0]);
-                searcher.MakeTranscription();
-                searcher.DisplayTranscription();
+                var converter = new LetterObjectConverter(args[0]);
+                var transcriptionSpecialist = new TranscriptionMaker(converter.ConverStringToLetterObjectList());
+                converter.DisplayTranscription(transcriptionSpecialist.MakeTranscription());
+                
+                
             }
             catch (IndexOutOfRangeException)
             {

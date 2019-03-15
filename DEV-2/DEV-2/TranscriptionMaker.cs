@@ -8,37 +8,21 @@ namespace DEV_2
 {
     class TranscriptionMaker
     {
-        private readonly char[] vowels = { 'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и' };
-        private readonly string[,] yoatedVowels = { { "ю", "у", "йу" }, { "я", "а", "йа" }, { "ё", "о", "йо" }, { "е", "э", "йэ" } };
-        private readonly char[] consonants = { 'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л', 'м', 'н',
-                                                 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ' };
-        private readonly char[] soundless = { 'ь', 'ъ' };
-        private StringBuilder recievedString;
-        private string RecievedString
+        private List<Letter> incertedString;
+        public TranscriptionMaker(List<Letter> incertedString)
         {
-            set
-            {
-                this.recievedString = new StringBuilder(value.ToLower());
-            }
+            this.incertedString = incertedString;
         }
-         /// <summary>
-         /// The class constructor.
-         /// </summary>
-         /// <param name="resievedString"></param>
-        public TranscriptionMaker(string recievedString)
-        {
-            RecievedString = recievedString;
-        }
-
         /// <summary>
-        /// This method returns transcription of resieved string.
+        /// This method returns transcription of recieved string.
         /// </summary>
-        public StringBuilder MakeTranscription()
+        public List<Letter> MakeTranscription()
         {
             ReplaceUnstressedO();
             SoftenConstans();
             ShowVowelsPronunciation();
-            return recievedString;
+            DeafAndRingingConverter();
+            return incertedString;
         }
 
         /// <summary>
@@ -46,16 +30,14 @@ namespace DEV_2
         /// </summary>
         private void ReplaceUnstressedO()
         {
-            recievedString.Replace('о', 'а');
-            for (int i = 1; i < recievedString.Length; i++)
+            foreach(Letter letter in incertedString)
             {
-                if(recievedString[i-1] == 'а' && recievedString[i] == '+')
+                if(letter.value == "о")
                 {
-                    recievedString.Replace('а', 'о', i - 1, 1);
-                }
-                if(recievedString[i]== '+')
-                {
-                    recievedString.Remove(i, 1);
+                    if(!letter.vowelType.isStressedVovel)
+                    {
+                        letter.sound = "a";
+                    }
                 }
             }
         }
@@ -63,22 +45,17 @@ namespace DEV_2
         /// <summary>
         /// 
         /// </summary>
-        public void SoftenConstans()
+        private void SoftenConstans()
         {
-            for (int i = 1; i < recievedString.Length; i++) 
+            for (int i = 1; i < incertedString.Count; i++) 
             {
-                for (int j = 0; j < yoatedVowels.GetLength(0); j++)
+                if(incertedString[i-1].isCosontans && incertedString[i].isVowel)
                 {
-                    if (consonants.Contains(recievedString[i - 1]) && recievedString[i].ToString() == yoatedVowels[j, 0]) 
+                    if(incertedString[i].vowelType.isYoated)
                     {
-                        recievedString.Replace(recievedString[i].ToString(), yoatedVowels[j, 1], i, 1);
-                        recievedString.Insert(i, "'", 1);                      
-                        i++;
+                        incertedString[i - 1].sound += "'";
+                        incertedString[i].sound = incertedString[i].vowelType.afterConsonantSound;
                     }
-                    /*if(consonants.Contains(recievedString[i - 1]) && recievedString[i] == 'ь')
-                    {
-                        recievedString.Replace('ь', '\'');
-                    }*/
                 }
             }
         }
@@ -86,36 +63,50 @@ namespace DEV_2
         /// <summary>
         /// 
         /// </summary>
-        public void ShowVowelsPronunciation()
+        private void ShowVowelsPronunciation()
         {
-            for (int i = 1; i < recievedString.Length; i++)
+            for (int i = 1; i < incertedString.Count; i++)
             {
-                for (int j = 0; j < yoatedVowels.GetLength(0); j++)
+                if (i - 1 == 0 && incertedString[i - 1].isVowel)
                 {
-                    if (i - 1 == 0 && recievedString[i - 1].ToString() == yoatedVowels[j, 0]) 
+                    if (incertedString[i - 1].vowelType.isYoated)
                     {
-                        recievedString.Replace(recievedString[i - 1].ToString(), yoatedVowels[j, 2], i - 1, 1);
-                        i++;
+                        incertedString[i - 1].sound = incertedString[i].vowelType.afterVowelSound;
                     }
-                    if ((vowels.Contains(recievedString[i - 1]) || soundless.Contains(recievedString[i - 1])) && recievedString[i].ToString() == yoatedVowels[j, 0])
+                }
+                if ((incertedString[i - 1].isVowel || incertedString[i - 1].isSoundless) && incertedString[i].isVowel)
+                {
+                    if (incertedString[i].vowelType.isYoated)
                     {
-                        recievedString.Replace(recievedString[i].ToString(), yoatedVowels[j, 2], i, 1);
-                        i++;
+                        incertedString[i].sound = incertedString[i].vowelType.afterVowelSound;
                     }
-
                 }
             }
         }
 
-
-
-        /// <summary>
-        /// This method displays transcription to the console.
-        /// </summary>
-        public void DisplayTranscription()
+        private void DeafAndRingingConverter()
         {
-            Console.WriteLine(recievedString);
+            for (int i = 1; i < incertedString.Count; i++)
+            {
+                if(incertedString[i-1].isCosontans && incertedString[i].isCosontans)
+                {
+                    if(incertedString[i-1].consontantType.isDeaf && incertedString[i].consontantType.isRinging)
+                    {
+                        incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
+                    }
+                    else if(incertedString[i-1].consontantType.isRinging && incertedString[i].consontantType.isDeaf)
+                    {
+                        incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
+                    }
+                }
+            }
+            if (incertedString[incertedString.Count - 1].isCosontans)
+            {
+                if(incertedString[incertedString.Count - 1].consontantType.isRinging)
+                {
+                    incertedString[incertedString.Count - 1].sound = incertedString[incertedString.Count - 1].consontantType.pair;
+                }
+            }
         }
-
     }
 }
