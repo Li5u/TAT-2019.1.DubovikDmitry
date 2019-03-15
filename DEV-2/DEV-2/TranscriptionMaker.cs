@@ -72,7 +72,7 @@ namespace DEV_2
                 {
                     if (incertedString[i - 1].vowelType.isYoated)
                     {
-                        incertedString[i - 1].sound = incertedString[i].vowelType.afterVowelSound;
+                        incertedString[i - 1].sound = incertedString[i - 1].vowelType.afterVowelSound;
                     }
                 }
                 if ((incertedString[i - 1].isVowel || incertedString[i - 1].isSoundless) && incertedString[i].isVowel)
@@ -95,7 +95,7 @@ namespace DEV_2
                 if (incertedString[i - 1].isCosontans && incertedString[i].isCosontans)
                 {
                     //Voice deaf consonant before ringing consonant.
-                    if (incertedString[i - 1].consontantType.isDeaf && incertedString[i].consontantType.isRinging)
+                    if (incertedString[i - 1].consontantType.isDeaf && incertedString[i].consontantType.isRinging && incertedString[i].consontantType.isPaired)
                     {
                         incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
                     }

@@ -9,6 +9,7 @@ namespace DEV_2
     {
         public bool isRinging = false;
         public bool isDeaf = false;
+        public bool isPaired = false;
         public string pair;
 
         /// <summary>
@@ -36,12 +37,14 @@ namespace DEV_2
                 if (letter.ToString().ToLower() == pairedConsonant[i, 0])
                 {
                     this.isRinging = true;
+                    this.isPaired = true;
                     this.pair = pairedConsonant[i, 1];
                     break;
                 }
                 else if (letter.ToString().ToLower() == pairedConsonant[i, 1])
                 {
                     this.isDeaf = true;
+                    this.isPaired = true;
                     this.pair = pairedConsonant[i, 0];
                     break;
                 }
