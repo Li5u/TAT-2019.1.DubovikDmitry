@@ -92,13 +92,24 @@ namespace DEV_2
         {
             for (int i = 1; i < incertedString.Count; i++)
             {
-                if(incertedString[i-1].isCosontans && incertedString[i].isCosontans)
+                if (incertedString[i - 1].isCosontans && incertedString[i].isCosontans)
                 {
-                    if(incertedString[i-1].consontantType.isDeaf && incertedString[i].consontantType.isRinging)
+                    //Voice deaf consonant before ringing consonant.
+                    if (incertedString[i - 1].consontantType.isDeaf && incertedString[i].consontantType.isRinging)
                     {
                         incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
                     }
-                    else if(incertedString[i-1].consontantType.isRinging && incertedString[i].consontantType.isDeaf)
+                    //Devoise ringing consonant before deaf consonant.
+                    else if (incertedString[i - 1].consontantType.isRinging && incertedString[i].consontantType.isDeaf)
+                    {
+                        incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
+                    }
+                }
+                /*If the word ends with voiced consonant then the devoise takes place. 
+                The same goes if the word ends with "ь, ъ" after the voiced consonant*/
+                else if (i == incertedString.Count - 1 && incertedString[i - 1].isCosontans && incertedString[i].isSoundless) 
+                {
+                    if (incertedString[i - 1].consontantType.isRinging) 
                     {
                         incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
                     }
