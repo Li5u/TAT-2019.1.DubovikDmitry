@@ -15,13 +15,7 @@ namespace DEV_2
             {
                 var converter = new LetterObjectConverter();
                 var transcriptionSpecialist = new TranscriptionMaker(converter.ConverStringToLetterObjectList(args[0]));
-                converter.DisplayTranscription(transcriptionSpecialist.MakeTranscription());
-                
-                
-            }
-            catch (IndexOutOfRangeException)
-            {
-                Console.WriteLine("Must be an argument!");
+                converter.DisplayTranscription(transcriptionSpecialist.MakeTranscription());               
             }
             catch (Exception ex)
             {
