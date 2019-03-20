@@ -89,14 +89,14 @@ namespace DEV_3
         {
             double leadEfficiency = _lead.Salary / (double)_lead.Productivity;
             double seniorEfficiency = _senior.Salary / (double)_senior.Productivity;
-            double middlEfficiency = _middle.Salary / (double)_middle.Productivity;
+            double middleEfficiency = _middle.Salary / (double)_middle.Productivity;
             double juniorEfficiency = _junior.Salary / (double)_junior.Productivity;
 
             while (productivity > 0)
             {
                 _employees[3]++;
                 productivity -= _lead.Productivity;
-                if (productivity < 0 && Math.Abs(productivity) * leadEfficiency > _senior.Productivity)
+                if (productivity < 0 && Math.Abs(productivity) * leadEfficiency > _senior.Salary)
                 {
                     _employees[3]--;
                     productivity += _lead.Productivity;
@@ -104,12 +104,12 @@ namespace DEV_3
                 }
 
             }
-
+            
             while (productivity > 0)
             {
                 _employees[2]++;
                 productivity -= _senior.Productivity;
-                if (productivity < 0 && Math.Abs(productivity) * seniorEfficiency > _middle.Productivity)
+                if (productivity < 0 && Math.Abs(productivity) * seniorEfficiency > _middle.Salary)
                 {
                     _employees[2]--;
                     productivity += _senior.Productivity;
@@ -121,14 +121,14 @@ namespace DEV_3
             {
                 _employees[1]++;
                 productivity -= _middle.Productivity;
-                if (productivity < 0 && Math.Abs(productivity) * leadEfficiency > _junior.Productivity)
+                if (productivity < 0 && Math.Abs(productivity) * middleEfficiency > _junior.Salary)
                 {
                     _employees[1]--;
                     productivity += _middle.Productivity;
                     break;
                 }
             }
-                        
+            
             while (productivity > 0)
             {
                 _employees[0]++;
