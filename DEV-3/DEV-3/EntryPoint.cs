@@ -11,7 +11,7 @@ namespace DEV_3
         static void Main(string[] args)
         {
             TeamSearcher ts = new TeamSearcher();
-            var team = ts.FindTeam(2200, 3728, 1);
+            var team = ts.FindTeam(2200, 205, 2);
             Console.WriteLine($"Junior: {team[0]}\nMiddle: {team[1]}\nSenior: {team[2]}\nLead:{team[3]}");
         }
     }

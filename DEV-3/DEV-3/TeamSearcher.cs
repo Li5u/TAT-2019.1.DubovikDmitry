@@ -43,6 +43,9 @@ namespace DEV_3
                 case 1:
                     FindEmployeesByFirstCriterion(amountOfMoney);
                     break;
+                case 2:
+                    FindEmployeesBySecondCriterion(productivity);
+                    break;
             }
             return _employees;
         }
@@ -73,6 +76,63 @@ namespace DEV_3
             {
                 _employees[0]++;
                 amountOfMoney -= _junior.Salary;
+            }
+            return _employees;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productivity"></param>
+        /// <returns></returns>
+        private List<int> FindEmployeesBySecondCriterion(int productivity)
+        {
+            double leadEfficiency = _lead.Salary / (double)_lead.Productivity;
+            double seniorEfficiency = _senior.Salary / (double)_senior.Productivity;
+            double middlEfficiency = _middle.Salary / (double)_middle.Productivity;
+            double juniorEfficiency = _junior.Salary / (double)_junior.Productivity;
+
+            while (productivity > 0)
+            {
+                _employees[3]++;
+                productivity -= _lead.Productivity;
+                if (productivity < 0 && Math.Abs(productivity) * leadEfficiency > _senior.Productivity)
+                {
+                    _employees[3]--;
+                    productivity += _lead.Productivity;
+                    break;
+                }
+
+            }
+
+            while (productivity > 0)
+            {
+                _employees[2]++;
+                productivity -= _senior.Productivity;
+                if (productivity < 0 && Math.Abs(productivity) * seniorEfficiency > _middle.Productivity)
+                {
+                    _employees[2]--;
+                    productivity += _senior.Productivity;
+                    break;
+                }
+            }
+            
+            while (productivity > 0)
+            {
+                _employees[1]++;
+                productivity -= _middle.Productivity;
+                if (productivity < 0 && Math.Abs(productivity) * leadEfficiency > _junior.Productivity)
+                {
+                    _employees[1]--;
+                    productivity += _middle.Productivity;
+                    break;
+                }
+            }
+                        
+            while (productivity > 0)
+            {
+                _employees[0]++;
+                productivity -= _junior.Productivity;
             }
             return _employees;
         }
