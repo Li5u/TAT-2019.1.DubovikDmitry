@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace DEV_3
 {
-    class Program
+    class Middle : Junior
     {
-        static void Main(string[] args)
+        public Middle()
         {
+            Salary = 1100;
+            Productivity = 25;
         }
     }
 }
