@@ -23,6 +23,9 @@ namespace DEV_3
             _lead = new Lead();
         }
 
-        public virtual void Choose() { }
+        internal virtual List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)
+        {
+            return team;
+        }
     }
 }

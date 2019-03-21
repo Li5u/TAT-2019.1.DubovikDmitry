@@ -49,7 +49,7 @@ namespace DEV_3
         /// <param name="productivity"></param>
         /// <param name="criterion"></param>
         /// <returns></returns>
-        public List<Employee> FindTeam(TeamSearcherWithMaxProductivity searcher, int amountOfMoney, int productivity)
+        public List<Employee> FindTeam(TeamSearcher searcher, int amountOfMoney, int productivity)
         {
             return(searcher.Choose(_availableEmployees, amountOfMoney, productivity));
         }

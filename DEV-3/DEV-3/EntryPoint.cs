@@ -10,9 +10,9 @@ namespace DEV_3
     {
         static void Main(string[] args)
         {
-            var ts = new TeamSearcherWithMaxProductivity();
+            TeamSearcher ts = new TeamSearcherWithMinimumCost();
             var dimaEntertainment = new Company();
-            var team = dimaEntertainment.FindTeam(ts, 10000, 400);
+            var team = dimaEntertainment.FindTeam(ts, 1000, 405);
             int leadCount = 0;
             int seniorCount = 0;
             int middleCount = 0;

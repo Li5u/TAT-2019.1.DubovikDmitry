@@ -8,7 +8,7 @@ namespace DEV_3
 {
     class TeamSearcherWithMaxProductivity : TeamSearcher
     {
-        internal  List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)
+        internal override  List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)
         {
             int currentProductivity = 0;
         leads:
@@ -78,11 +78,20 @@ namespace DEV_3
         returnTeam:
             if (currentProductivity < productivity)
             {
+                if (availableEmployees.Count == 0)
+                {
+                    foreach (var employee in team)
+                    {
+                        availableEmployees.Add(employee);
+                    }
+                    throw new Exception("We don't have employees for that productivity.");
+
+                }
                 foreach (var employee in team)
                 {
                     availableEmployees.Add(employee);
-                    throw new Exception("You don't have enough money for that productivity");
                 }
+                throw new Exception("You don't have enough money for that productivity.");
             }
             return team;
         }
