@@ -10,9 +10,37 @@ namespace DEV_3
     {
         static void Main(string[] args)
         {
-            TeamSearcher ts = new TeamSearcher();
-            var team = ts.FindTeam(2200, 205, 2);
-            Console.WriteLine($"Junior: {team[0]}\nMiddle: {team[1]}\nSenior: {team[2]}\nLead:{team[3]}");
+            var ts = new TeamSearcherWithMaxProductivity();
+            var dimaEntertainment = new Company();
+            var team = dimaEntertainment.FindTeam(ts, 10000, 400);
+            int leadCount = 0;
+            int seniorCount = 0;
+            int middleCount = 0;
+            int juniorCount = 0;
+            foreach(var a in team)
+            {
+                if(a is Lead)
+                {
+                    leadCount++;
+                    continue;
+                }
+                if(a is Senior)
+                {
+                    seniorCount++;
+                    continue;
+                }
+                if (a is Middle)
+                {
+                    middleCount++;
+                    continue;
+                }
+                if (a is Junior)
+                {
+                    juniorCount++;
+                    continue;
+                }
+            }
+            Console.WriteLine($"Junior: {juniorCount}\nMiddle: {middleCount}\nSenior: {seniorCount}\nLead:{leadCount}");
         }
     }
 }
