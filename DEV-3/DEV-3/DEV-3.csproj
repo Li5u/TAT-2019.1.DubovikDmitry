@@ -54,6 +54,7 @@
     <Compile Include="TeamSearcher.cs" />
     <Compile Include="TeamSearcherWithMaxProductivity.cs" />
     <Compile Include="TeamSearcherWithMinimumCost.cs" />
+    <Compile Include="TeamSearcherWithoutJuniors.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

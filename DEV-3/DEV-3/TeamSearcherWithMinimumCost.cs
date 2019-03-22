@@ -10,16 +10,10 @@ namespace DEV_3
     {
         internal override List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)
         {
-            int currentProductivity = 0;
-            double leadEfficiency = _lead.Salary / (double)_lead.Productivity;
-            double seniorEfficiency = _senior.Salary / (double)_senior.Productivity;
-            double middleEfficiency = _middle.Salary / (double)_middle.Productivity;
-            double juniorEfficiency = _junior.Salary / (double)_junior.Productivity;
-
         leads:
             while (productivity > 0)
             {
-                if (productivity * seniorEfficiency > _lead.Salary)
+                if (productivity * seniorEfficiency > lead.Salary)
                 {
                     foreach (var employee in availableEmployees)
                     {
@@ -27,9 +21,9 @@ namespace DEV_3
                         {
                             team.Add(employee);
                             availableEmployees.Remove(employee);
-                            amountOfMoney -= _lead.Salary;
-                            currentProductivity += _lead.Productivity;
-                            productivity -= _lead.Productivity;
+                            amountOfMoney -= lead.Salary;
+                            currentProductivity += lead.Productivity;
+                            productivity -=lead.Productivity;
                             goto leads;
                         }
                     }
@@ -40,7 +34,7 @@ namespace DEV_3
         seniors:
             while (productivity > 0)
             {
-                if (productivity * middleEfficiency > _senior.Salary)
+                if (productivity * middleEfficiency > senior.Salary)
                 {
                     foreach (var employee in availableEmployees)
                     {
@@ -48,9 +42,9 @@ namespace DEV_3
                         {
                             team.Add(employee);
                             availableEmployees.Remove(employee);
-                            amountOfMoney -= _senior.Salary;
-                            currentProductivity += _senior.Productivity;
-                            productivity -= _senior.Productivity;
+                            amountOfMoney -= senior.Salary;
+                            currentProductivity += senior.Productivity;
+                            productivity -= senior.Productivity;
                             goto seniors;
                         }
                     }
@@ -61,7 +55,7 @@ namespace DEV_3
         middles:
             while (productivity > 0)
             {
-                if (productivity * juniorEfficiency > _middle.Salary)
+                if (productivity * juniorEfficiency > middle.Salary)
                 {
                     foreach (var employee in availableEmployees)
                     {
@@ -69,9 +63,9 @@ namespace DEV_3
                         {
                             team.Add(employee);
                             availableEmployees.Remove(employee);
-                            amountOfMoney -= _middle.Salary;
-                            currentProductivity += _middle.Productivity;
-                            productivity -= _middle.Productivity;
+                            amountOfMoney -= middle.Salary;
+                            currentProductivity += middle.Productivity;
+                            productivity -=middle.Productivity;
                             goto middles;
                         }
                     }
@@ -88,9 +82,9 @@ namespace DEV_3
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= _junior.Salary;
-                        currentProductivity += _junior.Productivity;
-                        productivity -= _junior.Productivity;
+                        amountOfMoney -= junior.Salary;
+                        currentProductivity += junior.Productivity;
+                        productivity -= junior.Productivity;
                         goto juniors; ;
                     }
                 }
@@ -104,7 +98,7 @@ namespace DEV_3
                 {
                     availableEmployees.Add(employee);
                 }
-                throw new Exception("You don't have enought money for taht productivity.");
+                throw new Exception("You don't have enought money for that productivity.");
             }
             if (productivity > 0)
             {

@@ -10,9 +10,8 @@ namespace DEV_3
     {
         internal override  List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)
         {
-            int currentProductivity = 0;
         leads:
-            while (amountOfMoney >= _lead.Salary)
+            while (amountOfMoney >= lead.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
@@ -20,61 +19,65 @@ namespace DEV_3
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= _lead.Salary;
-                        currentProductivity += _lead.Productivity;
+                        amountOfMoney -= lead.Salary;
+                        currentProductivity += lead.Productivity;
                         goto leads;
                     }
                 }
                 goto seniors;
             }
+
         seniors:
-            while (amountOfMoney >= _senior.Salary)
+            while (amountOfMoney >= senior.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
-                    if (employee is Senior)
+                    if (employee is Senior && !(employee is Lead))
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= _senior.Salary;
-                        currentProductivity += _senior.Productivity;
+                        amountOfMoney -= senior.Salary;
+                        currentProductivity += senior.Productivity;
                         goto seniors;
                     }
                 }
                 goto middles;
             }
+
         middles:
-            while (amountOfMoney >= _middle.Salary)
+            while (amountOfMoney >= middle.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
-                    if (employee is Middle)
+                    if (employee is Middle && !(employee is Senior))
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= _middle.Salary;
-                        currentProductivity += _middle.Productivity;
+                        amountOfMoney -= middle.Salary;
+                        currentProductivity += middle.Productivity;
                         goto middles;
                     }
                 }
                 goto juniors;
             }
+
         juniors:
-            while (amountOfMoney >= _junior.Salary)
+            while (amountOfMoney >= junior.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
-                    if (employee is Junior)
+                    if (employee is Junior && !(employee is Middle))
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= _junior.Salary;
-                        currentProductivity += _junior.Productivity;
+                        amountOfMoney -= junior.Salary;
+                        currentProductivity += junior.Productivity;
                         goto juniors; ;
                     }
                 }
                 goto returnTeam;
             }
+
         returnTeam:
             if (currentProductivity < productivity)
             {

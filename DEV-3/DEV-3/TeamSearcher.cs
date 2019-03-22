@@ -8,19 +8,26 @@ namespace DEV_3
 {
     abstract class TeamSearcher
     {
-        protected Junior _junior;
-        protected Middle _middle;
-        protected Senior _senior;
-        protected Lead _lead;
+        protected Junior junior;
+        protected Middle middle;
+        protected Senior senior;
+        protected Lead lead;
+        protected double seniorEfficiency;
+        protected double middleEfficiency;
+        protected double juniorEfficiency;
+        protected int currentProductivity = 0;
         protected List<Employee> team;
 
         public TeamSearcher()
         {
             team = new List<Employee>();
-            _junior = new Junior();
-            _middle = new Middle();
-            _senior = new Senior();
-            _lead = new Lead();
+            junior = new Junior();
+            middle = new Middle();
+            senior = new Senior();
+            lead = new Lead();
+            seniorEfficiency = senior.Salary / (double)senior.Productivity;
+            middleEfficiency = middle.Salary / (double)middle.Productivity;
+            juniorEfficiency = junior.Salary / (double)junior.Productivity;
         }
 
         internal virtual List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)

@@ -16,7 +16,7 @@ namespace DEV_3
         private const int _seniorQuantity = 10;
         private const int _leadQuantity = 3;
         private List<Employee> _availableEmployees;
- 
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,7 +39,7 @@ namespace DEV_3
             {
                 _availableEmployees.Add(new Lead());
             }
-            
+
         }
 
         /// <summary>
@@ -51,64 +51,39 @@ namespace DEV_3
         /// <returns></returns>
         public List<Employee> FindTeam(TeamSearcher searcher, int amountOfMoney, int productivity)
         {
-            return(searcher.Choose(_availableEmployees, amountOfMoney, productivity));
+            return (searcher.Choose(_availableEmployees, amountOfMoney, productivity));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="productivity"></param>
-        /// <returns></returns>
-        /*private List<int> FindEmployeesBySecondCriterion(int productivity)
+        public void CountAndDisplayTeam(List<Employee> team)
         {
-            double leadEfficiency = _lead.Salary / (double)_lead.Productivity;
-            double seniorEfficiency = _senior.Salary / (double)_senior.Productivity;
-            double middleEfficiency = _middle.Salary / (double)_middle.Productivity;
-            double juniorEfficiency = _junior.Salary / (double)_junior.Productivity;
-
-            while (productivity > 0)
+            int leadCount = 0;
+            int seniorCount = 0;
+            int middleCount = 0;
+            int juniorCount = 0;
+            foreach (var a in team)
             {
-                _employees[3]++;
-                productivity -= _lead.Productivity;
-                if (productivity < 0 && Math.Abs(productivity) * leadEfficiency > _senior.Salary)
+                if (a is Lead)
                 {
-                    _employees[3]--;
-                    productivity += _lead.Productivity;
-                    break;
+                    leadCount++;
+                    continue;
                 }
-
-            }
-            
-            while (productivity > 0)
-            {
-                _employees[2]++;
-                productivity -= _senior.Productivity;
-                if (productivity < 0 && Math.Abs(productivity) * seniorEfficiency > _middle.Salary)
+                if (a is Senior)
                 {
-                    _employees[2]--;
-                    productivity += _senior.Productivity;
-                    break;
+                    seniorCount++;
+                    continue;
+                }
+                if (a is Middle)
+                {
+                    middleCount++;
+                    continue;
+                }
+                if (a is Junior)
+                {
+                    juniorCount++;
+                    continue;
                 }
             }
-            
-            while (productivity > 0)
-            {
-                _employees[1]++;
-                productivity -= _middle.Productivity;
-                if (productivity < 0 && Math.Abs(productivity) * middleEfficiency > _junior.Salary)
-                {
-                    _employees[1]--;
-                    productivity += _middle.Productivity;
-                    break;
-                }
-            }
-            
-            while (productivity > 0)
-            {
-                _employees[0]++;
-                productivity -= _junior.Productivity;
-            }
-            return _employees;*/
-       
+            Console.WriteLine($"Junior: {juniorCount}\nMiddle: {middleCount}\nSenior: {seniorCount}\nLead:{leadCount}");
+        }
     }
 }
