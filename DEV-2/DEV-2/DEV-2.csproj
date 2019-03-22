@@ -48,6 +48,7 @@
     <Compile Include="Letter.cs" />
     <Compile Include="LetterObjectConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Soundless.cs" />
     <Compile Include="TranscriptionMaker.cs" />
     <Compile Include="Vowel.cs" />
   </ItemGroup>

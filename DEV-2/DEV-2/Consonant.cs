@@ -5,12 +5,12 @@ namespace DEV_2
     /// <summary>
     /// This class keeps information about consonant letters.
     /// </summary>
-    class Consonant
+    class Consonant : Letter
     {
-        public bool isRinging = false;
-        public bool isDeaf = false;
-        public bool isPaired = false;
-        public string pair;
+        internal bool isRinging = false;
+        internal bool isDeaf = false;
+        internal bool isPaired = false;
+        internal string pair;
 
         /// <summary>
         /// The class constructor verifies consonant letter with his base 
@@ -18,6 +18,7 @@ namespace DEV_2
         /// </summary>
         /// <param name="letter"></param>
         public Consonant(char letter)
+            :base(letter)
         {
             string[,] pairedConsonant = { { "б", "п" }, { "в", "ф" }, { "г", "к" }, { "д", "т" }, { "ж", "ш" }, { "з", "с" } };
             string[] alwaysRinging = { "л", "м", "н", "р", "й" };

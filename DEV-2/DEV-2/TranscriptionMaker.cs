@@ -33,11 +33,15 @@ namespace DEV_2
         {
             foreach(Letter letter in incertedString)
             {
-                if(letter.value == "о")
+                if (letter is Vowel)
                 {
-                    if(!letter.vowelType.isStressedVovel)
+                    if (letter.Value == "о")
                     {
-                        letter.sound = "a";
+                        var vowel = (Vowel)letter;
+                        if (!(vowel.isStressedVovel))
+                        {
+                            letter.Sound = "a";
+                        }
                     }
                 }
             }
@@ -50,12 +54,13 @@ namespace DEV_2
         {
             for (int i = 1; i < incertedString.Count; i++) 
             {
-                if(incertedString[i-1].isCosontans && incertedString[i].isVowel)
+                if(incertedString[i-1] is Consonant && incertedString[i] is Vowel)
                 {
-                    if(incertedString[i].vowelType.isYoated)
+                    var vowel = (Vowel)incertedString[i];
+                    if(vowel.isYoated)
                     {
-                        incertedString[i - 1].sound += "'";
-                        incertedString[i].sound = incertedString[i].vowelType.afterConsonantSound;
+                        incertedString[i - 1].Sound += "'";
+                        vowel.Sound = vowel.afterConsonantSound;
                     }
                 }
             }
@@ -68,18 +73,20 @@ namespace DEV_2
         {
             for (int i = 1; i < incertedString.Count; i++)
             {
-                if (i - 1 == 0 && incertedString[i - 1].isVowel)
+                if (i - 1 == 0 && incertedString[i - 1] is Vowel)
                 {
-                    if (incertedString[i - 1].vowelType.isYoated)
+                    var vowel = (Vowel)incertedString[i - 1];
+                    if (vowel.isYoated)
                     {
-                        incertedString[i - 1].sound = incertedString[i - 1].vowelType.afterVowelSound;
+                        vowel.Sound = vowel.afterVowelSound;
                     }
                 }
-                if ((incertedString[i - 1].isVowel || incertedString[i - 1].isSoundless) && incertedString[i].isVowel)
+                if ((incertedString[i - 1] is Vowel || incertedString[i - 1] is Soundless) && incertedString[i] is Vowel)
                 {
-                    if (incertedString[i].vowelType.isYoated)
+                    var vowel = (Vowel)incertedString[i];
+                    if (vowel.isYoated)
                     {
-                        incertedString[i].sound = incertedString[i].vowelType.afterVowelSound;
+                        vowel.Sound = vowel.afterVowelSound;
                     }
                 }
             }
@@ -92,34 +99,38 @@ namespace DEV_2
         {
             for (int i = 1; i < incertedString.Count; i++)
             {
-                if (incertedString[i - 1].isCosontans && incertedString[i].isCosontans)
+                if (incertedString[i - 1] is Consonant && incertedString[i] is Consonant)
                 {
                     //Voice deaf consonant before ringing consonant.
-                    if (incertedString[i - 1].consontantType.isDeaf && incertedString[i].consontantType.isRinging && incertedString[i].consontantType.isPaired)
+                    var firstConsontant = (Consonant)incertedString[i - 1];
+                    var secondConsontant = (Consonant)incertedString[i];
+                    if (firstConsontant.isDeaf && secondConsontant.isRinging && secondConsontant.isPaired)
                     {
-                        incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
+                        firstConsontant.Sound = firstConsontant.pair;
                     }
                     //Devoise ringing consonant before deaf consonant.
-                    else if (incertedString[i - 1].consontantType.isRinging && incertedString[i].consontantType.isDeaf)
+                    else if (firstConsontant.isRinging && secondConsontant.isDeaf)
                     {
-                        incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
+                        firstConsontant.Sound = firstConsontant.pair;
                     }
                 }
                 /*If the word ends with voiced consonant then the devoise takes place. 
                 The same goes if the word ends with "ь, ъ" after the voiced consonant*/
-                else if (i == incertedString.Count - 1 && incertedString[i - 1].isCosontans && incertedString[i].isSoundless) 
+                else if (i == incertedString.Count - 1 && incertedString[i - 1] is Consonant && incertedString[i] is Soundless) 
                 {
-                    if (incertedString[i - 1].consontantType.isRinging) 
+                    var consontant = (Consonant)incertedString[i - 1];
+                    if (consontant.isRinging) 
                     {
-                        incertedString[i - 1].sound = incertedString[i - 1].consontantType.pair;
+                        consontant.Sound = consontant.pair;
                     }
                 }
             }
-            if (incertedString[incertedString.Count - 1].isCosontans)
+            if (incertedString[incertedString.Count - 1] is Consonant)
             {
-                if(incertedString[incertedString.Count - 1].consontantType.isRinging)
+                var consontant = (Consonant)incertedString[incertedString.Count - 1];
+                if (consontant.isRinging)
                 {
-                    incertedString[incertedString.Count - 1].sound = incertedString[incertedString.Count - 1].consontantType.pair;
+                    consontant.Sound = consontant.pair;
                 }
             }
         }

@@ -6,12 +6,12 @@
     /// <remarks>
     /// Stressed vowels must be in upper registry.
     /// </remarks>
-    class Vowel
+    class Vowel : Letter
     {
-        public bool isYoated = false; //'а','я','е','ё' are yoted.
-        public bool isStressedVovel = false;
-        public string afterConsonantSound;
-        public string afterVowelSound;
+        internal bool isYoated = false; //'а','я','е','ё' are yoted.
+        internal bool isStressedVovel = false;
+        internal string afterConsonantSound;
+        internal string afterVowelSound;
 
         /// <summary>
         /// The class constructor verifies vowel letter with his base 
@@ -19,6 +19,7 @@
         /// </summary>
         /// <param name="letter"></param>
         public Vowel(char letter)
+            :base(letter)
         {
             string[,] yoatedVowels = { { "ю", "у", "йу" }, { "я", "а", "йа" }, { "ё", "о", "йо" }, { "е", "э", "йэ" } };
             this.afterConsonantSound = letter.ToString().ToLower();

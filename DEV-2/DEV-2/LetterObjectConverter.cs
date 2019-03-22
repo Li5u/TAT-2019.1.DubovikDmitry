@@ -10,6 +10,10 @@ namespace DEV_2
     /// </summary>
     class LetterObjectConverter
     {
+        private readonly string[] _vowels = { "а", "о", "у", "ы", "э", "я", "е", "ё", "ю", "и" };
+        private readonly string[] _consonants = { "б", "в", "г", "д", "й", "ж", "з", "к", "л", "м", "н",
+                                                  "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" };
+        private readonly string[] _soundless = { "ь", "ъ" };
         private int counterOfStressedVowels = 0; //This field is using to check stressed vowels in recieved string.
 
         /// <summary>
@@ -77,7 +81,22 @@ namespace DEV_2
             var letters = new List<Letter> { };
             for (int i = 0; i < recievedString.Length; i++) 
             {
-                letters.Add(new Letter(recievedString[i]));
+                if (_consonants.Contains(recievedString[i].ToString().ToLower()))
+                {
+                    letters.Add(new Consonant(recievedString[i]));
+                }
+                else if (_vowels.Contains(recievedString[i].ToString().ToLower()))
+                {
+                    letters.Add(new Vowel(recievedString[i]));
+                }
+                else if(_soundless.Contains(recievedString[i].ToString().ToLower()))
+                {
+                    letters.Add(new Soundless(recievedString[i]));
+                }
+                else
+                {
+                    throw new Exception("Wrong symbol!");
+                }
             }
             return letters;
         }
@@ -95,7 +114,7 @@ namespace DEV_2
             var transcription = new StringBuilder();
             foreach (var letter in incecredString)
             {
-                transcription.Append(letter.sound);
+                transcription.Append(letter.Sound);
             }
             Console.WriteLine(transcription);
         }
