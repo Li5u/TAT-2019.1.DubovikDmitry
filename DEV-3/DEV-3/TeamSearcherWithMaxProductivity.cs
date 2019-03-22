@@ -1,17 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DEV_3
 {
+    /// <summary>
+    /// This class can find the best team for money that costumer has.
+    /// </summary>
     class TeamSearcherWithMaxProductivity : TeamSearcher
     {
-        internal override  List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)
+        /// <summary>
+        /// The class constructor initializes fields.
+        /// </summary>
+        /// <param name="amountOfMoney">Amount of money that costumer has</param>
+        /// <param name="productivity">Productivity that costumer requires</param>
+        public TeamSearcherWithMaxProductivity(int amountOfMoney, int productivity)
+        {
+            AmountOfMoney = amountOfMoney;
+            Productivity = productivity;
+        }
+
+        /// <summary>
+        /// This method finds and returns the best team for money that costumer has.
+        /// </summary>
+        /// <param name="availableEmployees"></param>
+        /// <returns></returns>
+        internal override  List<Employee> Choose(List<Employee> availableEmployees)
         {
         leads:
-            while (amountOfMoney >= lead.Salary)
+            while (AmountOfMoney >= lead.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
@@ -19,16 +35,16 @@ namespace DEV_3
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= lead.Salary;
+                        AmountOfMoney -= lead.Salary;
                         currentProductivity += lead.Productivity;
                         goto leads;
                     }
                 }
-                goto seniors;
+                goto seniors;// Go to label seniors if company doesn't have or doesn't need more leads.
             }
 
         seniors:
-            while (amountOfMoney >= senior.Salary)
+            while (AmountOfMoney >= senior.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
@@ -36,16 +52,16 @@ namespace DEV_3
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= senior.Salary;
+                        AmountOfMoney -= senior.Salary;
                         currentProductivity += senior.Productivity;
                         goto seniors;
                     }
                 }
-                goto middles;
+                goto middles;// Go to label middles if company doesn't have or doesn't need more seniors.
             }
 
         middles:
-            while (amountOfMoney >= middle.Salary)
+            while (AmountOfMoney >= middle.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
@@ -53,16 +69,16 @@ namespace DEV_3
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= middle.Salary;
+                        AmountOfMoney -= middle.Salary;
                         currentProductivity += middle.Productivity;
                         goto middles;
                     }
                 }
-                goto juniors;
+                goto juniors;// Go to label juniors if company doesn't have or doesn't need more middles.
             }
 
         juniors:
-            while (amountOfMoney >= junior.Salary)
+            while (AmountOfMoney >= junior.Salary)
             {
                 foreach (var employee in availableEmployees)
                 {
@@ -70,16 +86,16 @@ namespace DEV_3
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= junior.Salary;
+                        AmountOfMoney -= junior.Salary;
                         currentProductivity += junior.Productivity;
-                        goto juniors; ;
+                        goto juniors;
                     }
                 }
-                goto returnTeam;
+                goto returnTeam;// Go to label returnTeam if company doesn't have or doesn't need more juniors.
             }
 
         returnTeam:
-            if (currentProductivity < productivity)
+            if (currentProductivity < Productivity)
             {
                 if (availableEmployees.Count == 0)
                 {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DEV_3
+﻿namespace DEV_3
 {
     class Middle : Junior
     {
+        /// <summary>
+        /// This class contains middle salary and productivity.
+        /// </summary>
         public Middle()
         {
             Salary = 1100;

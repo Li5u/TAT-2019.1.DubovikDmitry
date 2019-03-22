@@ -10,10 +10,10 @@ namespace DEV_3
     {
         static void Main(string[] args)
         {
-            TeamSearcher ts = new TeamSearcherWithMinimumCost();
+            TeamSearcher ts = new TeamSearcherWithMaxProductivity(13000, 405);
             var dimaEntertainment = new Company();
-            var team = dimaEntertainment.FindTeam(ts, 13000, 405);
-            dimaEntertainment.CountAndDisplayTeam(team);
+            var team = dimaEntertainment.FindTeam(ts);
+            dimaEntertainment.CountAndDisplayEmployeesInTeam(team);
         }
     }
 }

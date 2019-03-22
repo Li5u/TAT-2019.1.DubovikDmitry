@@ -1,19 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DEV_3
 {
+    /// <summary>
+    /// This class can find the cheapest team for required productiviry.
+    /// </summary>
     class TeamSearcherWithMinimumCost : TeamSearcher
     {
-        internal override List<Employee> Choose(List<Employee> availableEmployees, int amountOfMoney, int productivity)
+        /// <summary>
+        /// The class constructor initializes fields.
+        /// </summary>
+        /// <param name="amountOfMoney">Amount of money that costumer has</param>
+        /// <param name="productivity">Productivity that costumer requires</param>
+        public TeamSearcherWithMinimumCost(int amountOfMoney, int productivity)
+        {
+            AmountOfMoney = amountOfMoney;
+            Productivity = productivity;
+        }
+
+        /// <summary>
+        /// This method finds and returns the cheapest team for required productiviry.
+        /// </summary>
+        /// <param name="availableEmployees"></param>
+        /// <returns></returns>
+        internal override List<Employee> Choose(List<Employee> availableEmployees)
         {
         leads:
-            while (productivity > 0)
+            while (Productivity > 0)
             {
-                if (productivity * seniorEfficiency > lead.Salary)
+                if (Productivity * SeniorEfficiency > lead.Salary)
                 {
                     foreach (var employee in availableEmployees)
                     {
@@ -21,20 +37,20 @@ namespace DEV_3
                         {
                             team.Add(employee);
                             availableEmployees.Remove(employee);
-                            amountOfMoney -= lead.Salary;
+                            AmountOfMoney -= lead.Salary;
                             currentProductivity += lead.Productivity;
-                            productivity -=lead.Productivity;
+                            Productivity -=lead.Productivity;
                             goto leads;
                         }
                     }
                 }
-                goto seniors;
+                goto seniors;// Go to label seniors if company doesn't have or doesn't need more leads.
             }
 
         seniors:
-            while (productivity > 0)
+            while (Productivity > 0)
             {
-                if (productivity * middleEfficiency > senior.Salary)
+                if (Productivity * MiddleEfficiency > senior.Salary)
                 {
                     foreach (var employee in availableEmployees)
                     {
@@ -42,20 +58,20 @@ namespace DEV_3
                         {
                             team.Add(employee);
                             availableEmployees.Remove(employee);
-                            amountOfMoney -= senior.Salary;
+                            AmountOfMoney -= senior.Salary;
                             currentProductivity += senior.Productivity;
-                            productivity -= senior.Productivity;
+                            Productivity -= senior.Productivity;
                             goto seniors;
                         }
                     }
                 }
-                goto middles;
+                goto middles;// Go to label middles if company doesn't have or doesn't need more seniors.
             }
 
         middles:
-            while (productivity > 0)
+            while (Productivity > 0)
             {
-                if (productivity * juniorEfficiency > middle.Salary)
+                if (Productivity * JuniorEfficiency > middle.Salary)
                 {
                     foreach (var employee in availableEmployees)
                     {
@@ -63,18 +79,18 @@ namespace DEV_3
                         {
                             team.Add(employee);
                             availableEmployees.Remove(employee);
-                            amountOfMoney -= middle.Salary;
+                            AmountOfMoney -= middle.Salary;
                             currentProductivity += middle.Productivity;
-                            productivity -=middle.Productivity;
+                            Productivity -=middle.Productivity;
                             goto middles;
                         }
                     }
                 }
-                goto juniors;
+                goto juniors;// Go to label juniorss if company doesn't have or doesn't need more middles.
             }
 
         juniors:
-            while (productivity > 0)
+            while (Productivity > 0)
             {
                 foreach (var employee in availableEmployees)
                 {
@@ -82,17 +98,17 @@ namespace DEV_3
                     {
                         team.Add(employee);
                         availableEmployees.Remove(employee);
-                        amountOfMoney -= junior.Salary;
+                        AmountOfMoney -= junior.Salary;
                         currentProductivity += junior.Productivity;
-                        productivity -= junior.Productivity;
-                        goto juniors; ;
+                        Productivity -= junior.Productivity;
+                        goto juniors;
                     }
                 }
-                goto returnTeam;
+                goto returnTeam;// Go to label returnTeam if company doesn't have or doesn't need more juniors.
             }
 
         returnTeam:
-            if (amountOfMoney < 0)
+            if (AmountOfMoney < 0)
             {
                 foreach (var employee in team)
                 {
@@ -100,7 +116,7 @@ namespace DEV_3
                 }
                 throw new Exception("You don't have enought money for that productivity.");
             }
-            if (productivity > 0)
+            if (Productivity > 0)
             {
                 foreach (var employee in team)
                 {

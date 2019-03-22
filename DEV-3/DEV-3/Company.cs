@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DEV_3
 {
     /// <summary>
-    /// 
+    /// This class contains all employees which available now.
     /// </summary>
     class Company
     {
@@ -18,7 +15,7 @@ namespace DEV_3
         private List<Employee> _availableEmployees;
 
         /// <summary>
-        /// 
+        /// The class constructor initializes fields.
         /// </summary>
         public Company()
         {
@@ -45,16 +42,18 @@ namespace DEV_3
         /// <summary>
         /// This method returns list of employees needed for task.
         /// </summary>
-        /// <param name="amountOfMoney"></param>
-        /// <param name="productivity"></param>
-        /// <param name="criterion"></param>
+        /// <param name="searcher">Searcher according to the customer's criteria</param>
         /// <returns></returns>
-        public List<Employee> FindTeam(TeamSearcher searcher, int amountOfMoney, int productivity)
+        public List<Employee> FindTeam(TeamSearcher searcher)
         {
-            return (searcher.Choose(_availableEmployees, amountOfMoney, productivity));
+            return (searcher.Choose(_availableEmployees));
         }
 
-        public void CountAndDisplayTeam(List<Employee> team)
+        /// <summary>
+        /// This method counts all employees in team and display this information to the console.
+        /// </summary>
+        /// <param name="team"></param>
+        public void CountAndDisplayEmployeesInTeam(List<Employee> team)
         {
             int leadCount = 0;
             int seniorCount = 0;
