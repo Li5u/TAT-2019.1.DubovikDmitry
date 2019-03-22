@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DEV_3
 {
     /// <summary>
-    /// Abstract class for searchers by criteria.
+    /// Abstract class for searchers by criterion.
     /// </summary>
     abstract class TeamSearcher
     {
