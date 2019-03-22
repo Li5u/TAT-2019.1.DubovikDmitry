@@ -36,7 +36,6 @@ namespace DEV_3
             {
                 _availableEmployees.Add(new Lead());
             }
-
         }
 
         /// <summary>
