@@ -5,7 +5,7 @@ namespace DEV_5
     /// <summary>
     /// This class creates flying objects for flight to the point. 
     /// </summary>
-    class Program
+    class EntryPoint
     {
         /// <summary>
         /// Entry point of the program that calculates and displays time that took different flying object to fly.
