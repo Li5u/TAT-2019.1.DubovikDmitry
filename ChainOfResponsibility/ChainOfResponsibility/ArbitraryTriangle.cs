@@ -3,9 +3,9 @@
 namespace ChainOfResponsibility
 {
     /// <summary>
-    /// Class for equilateral triangles.
+    /// Class for arbitrary triangles.
     /// </summary>
-    class EquilateralTriangle : Triangle
+    class ArbitraryTriangle : Triangle
     {
         /// <summary>
         /// Constructor calls base constructor.
@@ -13,16 +13,17 @@ namespace ChainOfResponsibility
         /// <param name="a">point a</param>
         /// <param name="b">point b</param>
         /// <param name="c">point c</param>
-        public EquilateralTriangle(Point a, Point b, Point c)
+        public ArbitraryTriangle(Point a, Point b, Point c)
             : base(a, b, c) { }
 
         /// <summary>
-        /// Calculates square of the equilateral triangle.
+        /// Calculates square of the arbitrary triangle.
         /// </summary>
         /// <returns>Value of the square</returns>
-        public override double GetSquare()
+        override public double GetSquare()
         {
-            return Math.Sqrt(3) * aSide * aSide / 4;
+            double p = (aSide + bSide + cSide) / 2;
+            return Math.Sqrt(p * (p - aSide) * (p - bSide) * (p - cSide));
         }
     }
 }
