@@ -10,6 +10,10 @@ namespace DEV_6
     {
         static void Main(string[] args)
         {
+            //var b = new XMLMaker();
+            //b.MakeXML();
+            var a = new CarsStock("CarsStock.xml");
+            Console.WriteLine(a.CountCars());
         }
     }
 }
