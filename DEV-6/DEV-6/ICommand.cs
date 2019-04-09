@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        int Execute(string type);
+        int Execute();
     }
 }

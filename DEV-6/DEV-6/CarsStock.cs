@@ -9,43 +9,66 @@ namespace DEV_6
 {
     class CarsStock
     {
-        XDocument XmlDocument { get; }
+        public List<Car> Cars { get; private set; }
 
-        /// <summary>
-        /// Constructor of CarsStock.
-        /// </summary>
-        /// <param name=name of XML></param>
-        public CarsStock(string name)
-        {
-            string fileName = name;
-            XmlDocument = XDocument.Load(fileName);
-        }
+  
+        public CarsStock(List<Car> cars) => Cars = cars;
 
         /// <summary>
         /// Method counts number of types.
         /// </summary>
-        /// <returns>Number of brend</returns>
-        public int CountTypes()
+        /// <returns>Number of brand</returns>
+        public int CountBrands()
         {
-            // Add list to save different brend.
-            HashSet<string> models = new HashSet<string>();
+            HashSet<string> brands = new HashSet<string>();
 
-            foreach (XElement el in XmlDocument.Root.Elements())
+            foreach (var car in Cars)
             {
-                models.Add(el.Attribute("name").Value);
+                brands.Add(car.Brand);
             }
 
-            return models.Count;
+            return brands.Count;
         }
 
-        public int CountCars()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int CountCars() => Cars.Count();
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double GetAveragePrice()
         {
-            int carsCounter = 0;
-            foreach (XElement el in XmlDocument.Root.Elements())
+            int totalPrice = 0;
+            foreach (var car in Cars)
             {
-                carsCounter += Int32.Parse(el.Element("count").Value);
+                totalPrice += car.Price;
             }
-            return carsCounter;
+            return totalPrice / CountCars();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns></returns>
+        public double GetAveragePriceByBrand(string brand)
+        {
+            int totalPrice = 0;
+            int carsByBrandCounter = 0;
+            foreach (var car in Cars)
+            {
+                if(car.Brand == brand)
+                {
+                    totalPrice += car.Price;
+                    carsByBrandCounter += 1;
+                }
+            }
+            return totalPrice / carsByBrandCounter;
         }
     }
 }
