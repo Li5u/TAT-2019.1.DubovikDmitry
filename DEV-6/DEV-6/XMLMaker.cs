@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace DEV_6
 {
+    /// <summary>
+    /// Class builds xml.
+    /// </summary>
     class XMLMaker
     {
+        /// <summary>
+        /// Builds xml document with inforamation about cars.
+        /// </summary>
         public void MakeXML()
         {
             string fileName = "CarsStock.xml";

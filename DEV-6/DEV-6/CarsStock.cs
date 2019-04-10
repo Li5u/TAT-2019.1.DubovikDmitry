@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace DEV_6
 {
+    /// <summary>
+    /// Class contains list of available cars and methods that give information about it.
+    /// </summary>
     class CarsStock
     {
         public List<Car> Cars { get; private set; }
 
-  
+        /// <summary>
+        /// Constructor initializes fields.
+        /// </summary>
+        /// <param name="cars">List of cars</param>
         public CarsStock(List<Car> cars) => Cars = cars;
 
         /// <summary>
@@ -31,16 +33,16 @@ namespace DEV_6
         }
 
         /// <summary>
-        /// 
+        /// Method counts number of cars
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Number of cars</returns>
         public int CountCars() => Cars.Count();
 
 
         /// <summary>
-        /// 
+        /// Calculates average price of all cars.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Average price</returns>
         public double GetAveragePrice()
         {
             int totalPrice = 0;
@@ -52,10 +54,10 @@ namespace DEV_6
         }
 
         /// <summary>
-        /// 
+        /// Calculates average price for a specific brand.
         /// </summary>
-        /// <param name="brand"></param>
-        /// <returns></returns>
+        /// <param name="brand">Brand</param>
+        /// <returns>Average price</returns>
         public double GetAveragePriceByBrand(string brand)
         {
             int totalPrice = 0;

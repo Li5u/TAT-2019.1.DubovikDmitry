@@ -43,12 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AveragePriceByBrandCommand.cs" />
+    <Compile Include="AveragePriceCommand.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="CarsDealer.cs" />
     <Compile Include="CarsStock.cs" />
+    <Compile Include="CountAllCommand.cs" />
     <Compile Include="CountTypesCommand.cs" />
     <Compile Include="ICommand.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLConverter.cs" />
     <Compile Include="XMLMaker.cs" />
