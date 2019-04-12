@@ -97,13 +97,14 @@ namespace DEV_6
         private CarsStock ChooseCarsStock()
         {
             Console.WriteLine("Enter type of car(car/truck):");
+            string command = Console.ReadLine();
 
-            if (Console.ReadLine() == "car")
+            if (command == "car")
             {
                 return CarsStock;
             }
 
-            else if (Console.ReadLine() == "truck")
+            else if (command == "truck")
             {
                 return TrucksStock;
             }
