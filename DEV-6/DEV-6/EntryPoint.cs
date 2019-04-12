@@ -13,6 +13,8 @@ namespace DEV_6
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            var a = new TrucksXMLMaker();
+            a.MakeXML();
             try
             {
                 if (args.Length == 0)
@@ -20,7 +22,8 @@ namespace DEV_6
                     throw new Exception("File name not specified");
                 }
                 var carGetter = new XMLConverter(args[0]);
-                var dealer = new CarsDealer(new CarsStock(carGetter.GetCars()));
+                var truckGetter = new XMLConverter(args[1]);
+                var dealer = new CarsDealer(new CarsStock(carGetter.GetCars()), new CarsStock(truckGetter.GetCars()));
                 dealer.GetInformation();
             }
             catch (Exception ex)

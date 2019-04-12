@@ -11,6 +11,22 @@ namespace DEV_6
     class XMLConverter
     {
         private XDocument XmlDocument { get; set; }
+        private static XMLConverter _instance;
+
+        /// <summary>
+        /// Singlton pattern.
+        /// </summary>
+        /// <param name="fileName">Filename</param>
+        /// <returns></returns>
+        public static XMLConverter getInstance(string fileName)
+        {
+            if (_instance == null)
+            {
+                _instance = new XMLConverter(fileName); 
+            }
+
+            return _instance;
+        }
 
         /// <summary>
         /// Constructor initializes fields.

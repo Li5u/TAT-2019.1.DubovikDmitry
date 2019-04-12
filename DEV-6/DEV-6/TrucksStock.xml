@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TrucksStock>
+  <truck name="Kamaz 1" brand="Kamaz" model="1">
+    <count>10</count>
+    <price>30000</price>
+  </truck>
+  <truck name="Kamaz 2" brand="Kamaz" model="2">
+    <count>3</count>
+    <price>60000</price>
+  </truck>
+  <truck name="Maz 1" brand="Maz" model="1">
+    <count>8</count>
+    <price>95000</price>
+  </truck>
+  <truck name="Maz 5" brand="Maz" model="5">
+    <count>15</count>
+    <price>55000</price>
+  </truck>
+</TrucksStock>

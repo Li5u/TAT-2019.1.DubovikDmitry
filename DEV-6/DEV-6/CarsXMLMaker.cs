@@ -5,7 +5,7 @@ namespace DEV_6
     /// <summary>
     /// Class builds xml.
     /// </summary>
-    class XMLMaker
+    class CarsXMLMaker
     {
         /// <summary>
         /// Builds xml document with inforamation about cars.
