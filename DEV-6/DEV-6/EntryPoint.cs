@@ -30,7 +30,6 @@ namespace DEV_6
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
-
         }
     }
 }

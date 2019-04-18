@@ -28,12 +28,19 @@ namespace DEV_6
         /// </summary>
         public void GetInformation()
         {
-            Console.WriteLine("You have commands :\n1)count types\n2)count all\n3)average price\n4)average price <type>\n5)exit\n6)execute");
-            Console.WriteLine("Enter command : ");
-            string command = String.Empty;
-            while ((command = Console.ReadLine().ToLower()) != "exit")
+            Console.WriteLine("You have commands :\n1)count types\n2)count all\n3)average price\n4)average price <type>\n5)execute\n6)exit");
+            Console.WriteLine("Enter command(1-6) : ");
+
+            bool isInformationNeed = true;
+
+            while (isInformationNeed)
             {
-                if (command == "execute")
+                if (!int.TryParse(Console.ReadLine(), out int input))
+                {
+                    throw new Exception("Incorrect input data");
+                }
+
+                if ((AvailableCommands)input == AvailableCommands.Execute)
                 {
                     foreach(var com in _commandsToExecute)
                     {
@@ -41,33 +48,37 @@ namespace DEV_6
                     }
                 }
 
-                else if (command == "count types")
+                else if ((AvailableCommands)input == AvailableCommands.CountTypes)
                 {
                     Command = new CountTypesCommand(ChooseCarsStock());
                     _commandsToExecute.Add(Command);
                     Console.WriteLine(Command?.Execute());
                 }
 
-                else if (command == "count all")
+                else if ((AvailableCommands)input == AvailableCommands.CountAll)
                 {
                     Command = new CountAllCommand(ChooseCarsStock());
                     _commandsToExecute.Add(Command);
                     Console.WriteLine(Command?.Execute());
                 }
 
-                else if (command == "average price")
+                else if ((AvailableCommands)input == AvailableCommands.AveragePrice)
                 {
                     Command = new AveragePriceCommand(ChooseCarsStock());
                     _commandsToExecute.Add(Command);
                     Console.WriteLine(Command?.Execute());
                 }
 
-                else if (command.Contains("average price"))
+                else if ((AvailableCommands)input == AvailableCommands.AveragePriceType)
                 {
                     bool isBrandOnTheStock = false;
+
+                    Console.WriteLine("Enter car brand:");
+                    string brand = Console.ReadLine();
+
                     foreach (var car in CarsStock.Cars)
                     {
-                        if (command.Contains(car.Brand.ToLower()))
+                        if (brand == car.Brand.ToLower())
                         {
                             Command = new AveragePriceByBrandCommand(ChooseCarsStock(), car.Brand);
                             _commandsToExecute.Add(Command);
@@ -83,6 +94,11 @@ namespace DEV_6
                     }   
                 }
 
+                else if ((AvailableCommands)input == AvailableCommands.Exit)
+                {
+                    isInformationNeed = false;
+                }
+
                 else
                 {
                     Console.WriteLine("This command does not exist. Please enter from the suggested list.");
@@ -96,15 +112,19 @@ namespace DEV_6
         /// <returns></returns>
         private CarsStock ChooseCarsStock()
         {
-            Console.WriteLine("Enter type of car(car/truck):");
-            string command = Console.ReadLine();
+            Console.WriteLine("Enter type of car(passenger(1)/truck(2):");
 
-            if (command == "car")
+            if (!int.TryParse(Console.ReadLine(), out int input))
+            {
+                throw new Exception("Incorrect input data");
+            }
+
+            if ((CarTypes)input == CarTypes.Passenger)
             {
                 return CarsStock;
             }
 
-            else if (command == "truck")
+            else if ((CarTypes)input == CarTypes.Truck)
             {
                 return TrucksStock;
             }

@@ -49,6 +49,7 @@
     <Compile Include="Car.cs" />
     <Compile Include="CarsDealer.cs" />
     <Compile Include="CarsStock.cs" />
+    <Compile Include="CarTypes.cs" />
     <Compile Include="CountAllCommand.cs" />
     <Compile Include="CountTypesCommand.cs" />
     <Compile Include="ICommand.cs" />

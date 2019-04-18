@@ -1,9 +1,9 @@
 ﻿namespace DEV_6
 {
     /// <summary>
-    /// Available commands
+    /// Available commands.
     /// </summary>
-    public enum CatalogCommands
+    public enum AvailableCommands
     {
         CountTypes = 1,
         CountAll,

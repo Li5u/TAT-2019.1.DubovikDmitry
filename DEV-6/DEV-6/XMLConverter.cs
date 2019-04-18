@@ -4,7 +4,6 @@ using System.Xml.Linq;
 
 namespace DEV_6
 {
-
     /// <summary>
     /// This class parse xml document.
     /// </summary>
@@ -51,6 +50,7 @@ namespace DEV_6
                                      Int32.Parse(el.Element("price").Value)));
                 }
             }
+
             return cars;
         }
     }

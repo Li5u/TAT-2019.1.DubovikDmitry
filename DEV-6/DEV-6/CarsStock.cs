@@ -14,7 +14,10 @@ namespace DEV_6
         /// Constructor initializes fields.
         /// </summary>
         /// <param name="cars">List of cars</param>
-        public CarsStock(List<Car> cars) => Cars = cars;
+        public CarsStock(List<Car> cars)
+        {
+            Cars = cars;
+        }
 
         /// <summary>
         /// Method counts number of types.
@@ -36,8 +39,10 @@ namespace DEV_6
         /// Method counts number of cars
         /// </summary>
         /// <returns>Number of cars</returns>
-        public int CountCars() => Cars.Count();
-
+        public int CountCars()
+        {
+            return Cars.Count();
+        }
 
         /// <summary>
         /// Calculates average price of all cars.
@@ -46,10 +51,12 @@ namespace DEV_6
         public double GetAveragePrice()
         {
             int totalPrice = 0;
+
             foreach (var car in Cars)
             {
                 totalPrice += car.Price;
             }
+
             return totalPrice / CountCars();
         }
 
@@ -62,6 +69,7 @@ namespace DEV_6
         {
             int totalPrice = 0;
             int carsByBrandCounter = 0;
+
             foreach (var car in Cars)
             {
                 if(car.Brand == brand)
@@ -70,6 +78,7 @@ namespace DEV_6
                     carsByBrandCounter += 1;
                 }
             }
+
             return totalPrice / carsByBrandCounter;
         }
     }
