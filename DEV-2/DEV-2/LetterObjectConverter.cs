@@ -21,8 +21,7 @@ namespace DEV_2
         /// </summary>
         /// <param name="receievedString"></param>
         private void UpperStressedVowel(StringBuilder receievedString)
-        {
-            
+        {       
             for (int i = 1; i < receievedString.Length; i++)
             {
                 if ((receievedString[i] == '+' && receievedString[i - 1] != 'ё'))
@@ -31,6 +30,7 @@ namespace DEV_2
                     counterOfStressedVowels++;
                 }
             }
+
             for (int i = 0; i < receievedString.Length; i++)
             {
                 if (receievedString[i] == 'ё')
@@ -38,22 +38,26 @@ namespace DEV_2
                     receievedString.Replace(receievedString[i].ToString(), receievedString[i].ToString().ToUpper(), i, 1);
                     counterOfStressedVowels++;
                 }
+
                 //Delete '+' symbol from string.
                 if (receievedString[i] == '+')
                 {
                     receievedString.Remove(i, 1);
                 }
             }
+
             if (counterOfStressedVowels > 1)
             {
                 throw new Exception("To many stressed vowels!");
             }
+
             /*In case if program can't find stressed vowels('ё' or vowels before '+') 
              *  it makes all vowels stressed and count them.*/
             if (counterOfStressedVowels == 0)
             {
                 int counterOfVowels = 0;
                 string[] vowels = { "а", "о", "у", "ы", "э", "я", "е", "ё", "ю", "и" };
+
                 for (int i = 0; i < receievedString.Length; i++)
                 {
                     if(vowels.Contains(receievedString[i].ToString()))
@@ -62,6 +66,7 @@ namespace DEV_2
                         receievedString.Replace(receievedString[i].ToString(), receievedString[i].ToString().ToUpper(), i, 1);
                     }
                 }
+
                 if (counterOfVowels > 1)
                 {
                     throw new Exception ("Stressed vowel must be marked with '+'!");
@@ -79,6 +84,7 @@ namespace DEV_2
             var recievedString = new StringBuilder(recievedWord);
             UpperStressedVowel(recievedString);
             var letters = new List<Letter> { };
+
             for (int i = 0; i < recievedString.Length; i++) 
             {
                 if (_consonants.Contains(recievedString[i].ToString().ToLower()))
@@ -98,6 +104,7 @@ namespace DEV_2
                     throw new Exception("Wrong symbol!");
                 }
             }
+
             return letters;
         }
 

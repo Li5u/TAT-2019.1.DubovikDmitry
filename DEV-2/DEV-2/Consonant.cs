@@ -23,11 +23,13 @@ namespace DEV_2
             string[,] pairedConsonant = { { "б", "п" }, { "в", "ф" }, { "г", "к" }, { "д", "т" }, { "ж", "ш" }, { "з", "с" } };
             string[] alwaysRinging = { "л", "м", "н", "р", "й" };
             string[] alwaysDeaf = { "х", "ц", "ч", "щ" };
+
             if (alwaysRinging.Contains(letter.ToString().ToLower()))
             {
                 this.isRinging = true;
                 this.pair = letter.ToString();
             }
+
             if (alwaysDeaf.Contains(letter.ToString().ToLower()))
             {
                 this.isDeaf = true;
@@ -42,6 +44,7 @@ namespace DEV_2
                     this.pair = pairedConsonant[i, 1];
                     break;
                 }
+
                 else if (letter.ToString().ToLower() == pairedConsonant[i, 1])
                 {
                     this.isDeaf = true;

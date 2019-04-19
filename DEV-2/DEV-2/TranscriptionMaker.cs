@@ -33,15 +33,13 @@ namespace DEV_2
         {
             foreach(Letter letter in incertedString)
             {
-                if (letter is Vowel)
+                if (letter is Vowel && letter.Value == "о")
                 {
-                    if (letter.Value == "о")
+                    var vowel = (Vowel)letter;
+
+                    if (!(vowel.isStressedVovel))
                     {
-                        var vowel = (Vowel)letter;
-                        if (!(vowel.isStressedVovel))
-                        {
-                            letter.Sound = "a";
-                        }
+                        letter.Sound = "a";
                     }
                 }
             }
@@ -57,6 +55,7 @@ namespace DEV_2
                 if(incertedString[i-1] is Consonant && incertedString[i] is Vowel)
                 {
                     var vowel = (Vowel)incertedString[i];
+
                     if(vowel.isYoated)
                     {
                         incertedString[i - 1].Sound += "'";
@@ -76,6 +75,7 @@ namespace DEV_2
                 if (i - 1 == 0 && incertedString[i - 1] is Vowel)
                 {
                     var vowel = (Vowel)incertedString[i - 1];
+
                     if (vowel.isYoated)
                     {
                         vowel.Sound = vowel.afterVowelSound;
@@ -84,6 +84,7 @@ namespace DEV_2
                 if ((incertedString[i - 1] is Vowel || incertedString[i - 1] is Soundless) && incertedString[i] is Vowel)
                 {
                     var vowel = (Vowel)incertedString[i];
+
                     if (vowel.isYoated)
                     {
                         vowel.Sound = vowel.afterVowelSound;
@@ -104,21 +105,25 @@ namespace DEV_2
                     //Voice deaf consonant before ringing consonant.
                     var firstConsontant = (Consonant)incertedString[i - 1];
                     var secondConsontant = (Consonant)incertedString[i];
+
                     if (firstConsontant.isDeaf && secondConsontant.isRinging && secondConsontant.isPaired)
                     {
                         firstConsontant.Sound = firstConsontant.pair;
                     }
+
                     //Devoise ringing consonant before deaf consonant.
                     else if (firstConsontant.isRinging && secondConsontant.isDeaf)
                     {
                         firstConsontant.Sound = firstConsontant.pair;
                     }
                 }
+
                 /*If the word ends with voiced consonant then the devoise takes place. 
                 The same goes if the word ends with "ь, ъ" after the voiced consonant*/
                 else if (i == incertedString.Count - 1 && incertedString[i - 1] is Consonant && incertedString[i] is Soundless) 
                 {
                     var consontant = (Consonant)incertedString[i - 1];
+
                     if (consontant.isRinging) 
                     {
                         consontant.Sound = consontant.pair;
@@ -128,6 +133,7 @@ namespace DEV_2
             if (incertedString[incertedString.Count - 1] is Consonant)
             {
                 var consontant = (Consonant)incertedString[incertedString.Count - 1];
+
                 if (consontant.isRinging)
                 {
                     consontant.Sound = consontant.pair;
