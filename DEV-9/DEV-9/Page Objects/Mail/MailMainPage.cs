@@ -8,28 +8,34 @@ using OpenQA.Selenium.Support.UI;
 
 namespace DEV_9.Page_Objects
 {
-    public class MainPage
+    public class MailMainPage
     {
         IWebDriver Driver { get; }
         WebDriverWait Wait { get; }
         IWebElement LetterButton { get; set; }
-        IWebElement SelecterLetter { get; set; }
-        Locators.MainPageLocators Locator { get; }
+        IWebElement LatestLetter { get; set; }
+        Locators.MailMainPageLocators Locator { get; }
 
-        public MainPage(IWebDriver driver)
+        public MailMainPage(IWebDriver driver)
         {
             this.Driver = driver;
             this.Wait = new WebDriverWait(Driver, TimeSpan.FromMinutes(1));
-            this.Locator = new Locators.MainPageLocators();
+            this.Locator = new Locators.MailMainPageLocators();
         }
 
-        public void ClickToWriteLetter()
+        public IWebElement FindWriteLetterButton()
+        {
+            Wait.Until(t => Driver.FindElements(By.XPath(Locator.WriteLetterButtonLocator)).Any());
+            return Driver.FindElement(By.XPath(Locator.WriteLetterButtonLocator));
+        }
+
+        public Mail.MailSenderLetterPage ClickToWriteLetterButton()
         {
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.WriteLetterButtonLocator)).Any());
             LetterButton = Driver.FindElement(By.XPath(Locator.WriteLetterButtonLocator));
             LetterButton.Click();
 
-            //return new SenderLetterMailPage(Driver);
+            return new Mail.MailSenderLetterPage(Driver);
         }
 
         public void SelectUnseenLetter(string senderName)
@@ -43,11 +49,10 @@ namespace DEV_9.Page_Objects
 
             // Wait unread letter.
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.SelecterUnreadLetterLocator)).Any());
-            SelecterLetter = Driver.FindElement(By.XPath(Locator.SelecterUnreadLetterLocator)).FindElement(By.XPath($"//a"));
-            SelecterLetter.Click();
+            LatestLetter = Driver.FindElement(By.XPath(Locator.SelecterUnreadLetterLocator));
+            LatestLetter.Click();
 
             //return new LetterMailPage(Driver);
         }
-
     }
 }

@@ -4,21 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace DEV_9.Page_Objects
 {
-    public class LoginPage
+    public class MailLoginPage
     {
         IWebDriver Driver { get; }
+        WebDriverWait Wait { get; }
         IWebElement Login { get; set; }
         IWebElement Password { get; set; }
         IWebElement LoginButton { get; set; }
-        Locators.LoginPageLocators Locator { get; }
+        Locators.MailLoginPageLocators Locator { get; }
 
-        public LoginPage(IWebDriver driver)
+        public MailLoginPage(IWebDriver driver)
         {
             this.Driver = driver;
-            this.Locator = new Locators.LoginPageLocators();
+            this.Wait = new WebDriverWait(Driver, TimeSpan.FromMinutes(1));
+            this.Locator = new Locators.MailLoginPageLocators();
         }
 
         public void GoToPage()
@@ -26,25 +29,28 @@ namespace DEV_9.Page_Objects
             Driver.Navigate().GoToUrl(Locator.PageLocator);
         }
 
-        public LoginPage TypeUsername(String username)
+        public MailLoginPage TypeUsername(String username)
         {
+            Wait.Until(t => Driver.FindElements(By.XPath(Locator.LoginLocator)).Any());
             Driver.FindElement(By.XPath(Locator.LoginLocator)).SendKeys(username);
             return this;
         }
 
-        public LoginPage TypePassword(String password)
+        public MailLoginPage TypePassword(String password)
         {
+            Wait.Until(t => Driver.FindElements(By.XPath(Locator.PasswordLocator)).Any());
             Driver.FindElement(By.XPath(Locator.PasswordLocator)).SendKeys(password);
             return this;
         }
 
-        public MainPage SubmitLogin()
+        public MailMainPage SubmitLogin()
         {
+            Wait.Until(t => Driver.FindElements(By.XPath(Locator.LoginButtonLocator)).Any());
             Driver.FindElement(By.XPath(Locator.LoginButtonLocator)).Click();  
-            return new MainPage(Driver);
+            return new MailMainPage(Driver);
         }
 
-        public MainPage LoginAs(String username, String password)
+        public MailMainPage LoginAs(String username, String password)
         {
             TypeUsername(username);
             TypePassword(password);

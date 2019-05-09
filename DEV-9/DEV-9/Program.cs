@@ -13,11 +13,17 @@ namespace DEV_9
         static void Main(string[] args)
         {
             IWebDriver driver = new ChromeDriver("C:/Users/User/Downloads");
-            var lpl = new Locators.LoginPageLocators();
-            var lp = new Page_Objects.LoginPage(driver);
+            var lpl = new Locators.MailLoginPageLocators();
+            var lp = new Page_Objects.MailLoginPage(driver);
             lp.GoToPage();
-            var mp = lp.LoginAs("dimkadubovik99", "24514125dds99");
-            mp.SelectUnseenLetter("Дмитрий");
+            var mp = lp.LoginAs("demitrodub", "qwaqwaqwa11");
+            var sendletter = mp.ClickToWriteLetterButton();
+            sendletter.SendLetter("dubovikdmitro@yandex.by", "give me new name");
+            var lpp = new Page_Objects.Yandex.YandexLoginPage(driver);
+            lpp.GoToPage();
+            var mpp = lpp.LoginAs("dubovikdmitro", "qwaqwa11");
+            var a = mpp.SelectLatestLetter("d");
+            a.ReplyToTheLetter("Plevok");
         }
     }
 }
