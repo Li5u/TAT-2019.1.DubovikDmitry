@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace DEV_9.Page_Objects.Yandex
 {
+    /// <summary>
+    /// Class for yandex main page.
+    /// </summary>
     class YandexMainPage
     {
         IWebDriver Driver { get; }
@@ -15,6 +15,10 @@ namespace DEV_9.Page_Objects.Yandex
         IWebElement LatestLetter { get; set; }
         Locators.Yandex.YandexMainPageLocators Locator { get; }
 
+        /// <summary>
+        /// Class constuctor initializes fields.
+        /// </summary>
+        /// <param name="driver"></param>
         public YandexMainPage(IWebDriver driver)
         {
             this.Driver = driver;
@@ -22,12 +26,15 @@ namespace DEV_9.Page_Objects.Yandex
             this.Locator = new Locators.Yandex.YandexMainPageLocators();
         }
 
+        /// <summary>
+        /// Opens latest letter;
+        /// </summary>
+        /// <param name="senderName"></param>
+        /// <returns></returns>
         public YandexReadLetterPage SelectLatestLetter(string senderName)
         {
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.LatestMaleLocator)).Any());
             LatestLetter = Driver.FindElement(By.XPath(Locator.LatestMaleLocator));
-            string name = LatestLetter.FindElement(By.XPath("//span[@class = 'mail-MessageSnippet-FromText']")).Text;
-            Console.WriteLine(name);
             LatestLetter.Click();
 
             return new YandexReadLetterPage(Driver);

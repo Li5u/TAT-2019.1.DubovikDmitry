@@ -1,6 +1,9 @@
 ﻿namespace DEV_9.Locators.Yandex
 {
-    class YandexLoginPageLocators
+    /// <summary>
+    /// Class with locators for yandex.by login page.
+    /// </summary>
+    public class YandexLoginPageLocators
     {
         public string PageLocator { get; } = "https://yandex.by/";
         public string LoginIntoButtonLocator { get; } = "//a[contains(@class,'button desk-notif-card__login-enter-expanded')]";

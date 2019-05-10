@@ -1,6 +1,9 @@
 ﻿namespace DEV_9.Locators
 {
-    public class MailLoginPageLocators : Locator
+    /// <summary>
+    /// Class with locators for mail.ru login page.
+    /// </summary>
+    public class MailLoginPageLocators
     {
         public string PageLocator { get; } = "https://mail.ru/";
         public string LoginLocator { get; } = "//input[@id = 'mailbox:login']";

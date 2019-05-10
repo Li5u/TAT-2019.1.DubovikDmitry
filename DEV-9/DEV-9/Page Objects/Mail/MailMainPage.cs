@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace DEV_9.Page_Objects
 {
+    /// <summary>
+    /// Class for mail.ru main page.
+    /// </summary>
     public class MailMainPage
     {
         IWebDriver Driver { get; }
@@ -16,6 +16,10 @@ namespace DEV_9.Page_Objects
         IWebElement LatestLetter { get; set; }
         Locators.MailMainPageLocators Locator { get; }
 
+        /// <summary>
+        /// Class constuctor initializes fields.
+        /// </summary>
+        /// <param name="driver"></param>
         public MailMainPage(IWebDriver driver)
         {
             this.Driver = driver;
@@ -23,36 +27,41 @@ namespace DEV_9.Page_Objects
             this.Locator = new Locators.MailMainPageLocators();
         }
 
+        /// <summary>
+        /// Class for tests tries to find write massege button element on page.
+        /// </summary>
+        /// <returns></returns>
         public IWebElement FindWriteLetterButton()
         {
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.WriteLetterButtonLocator)).Any());
+
             return Driver.FindElement(By.XPath(Locator.WriteLetterButtonLocator));
         }
 
-        public Mail.MailSenderLetterPage ClickToWriteLetterButton()
+        /// <summary>
+        /// Clicks write new message button.
+        /// </summary>
+        /// <returns></returns>
+        public Mail.MailSendLetterPage ClickToWriteLetterButton()
         {
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.WriteLetterButtonLocator)).Any());
             LetterButton = Driver.FindElement(By.XPath(Locator.WriteLetterButtonLocator));
             LetterButton.Click();
 
-            return new Mail.MailSenderLetterPage(Driver);
+            return new Mail.MailSendLetterPage(Driver);
         }
 
-        public void SelectUnseenLetter(string senderName)
+        /// <summary>
+        /// Opens latest mail.
+        /// </summary>
+        /// <returns></returns>
+        public Mail.MailReadLetterPage SelectUnseenLetter()
         {
-            //public string SelectUnseenLetterLocator(string name)
-            //{
-            //    return $"//a[contains(@data-title, '{name}')]//div//span[@class= 'b-datalist__item__status-unread']/following::div[3]/div[3]/div";
-            //}
-            //Wait.Until(t => Driver.FindElements(By.XPath(Locator.SelectUnseenLetterLocator(senderName))).Any());
-            //SelecterLetter = Driver.FindElement(By.XPath(Locator.SelectUnseenLetterLocator(senderName)));
-
-            // Wait unread letter.
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.SelecterUnreadLetterLocator)).Any());
             LatestLetter = Driver.FindElement(By.XPath(Locator.SelecterUnreadLetterLocator));
             LatestLetter.Click();
 
-            //return new LetterMailPage(Driver);
+            return new Mail.MailReadLetterPage(Driver);
         }
     }
 }

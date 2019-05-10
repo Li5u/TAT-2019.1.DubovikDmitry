@@ -30,10 +30,6 @@ namespace DEV_9.Tests
             Assert.True(mainPage.FindWriteLetterButton().Displayed);
         }
 
-        /// <summary>
-        /// Negative test for logging in:
-        /// empty input, results in error message.
-        /// </summary>
         [Test]
         public void Login_EmptyInput_ErrorMessage()
         {
@@ -44,10 +40,6 @@ namespace DEV_9.Tests
             Assert.IsTrue(log.Count == 2);
         }
 
-        /// <summary>
-        /// Negative test for logging in:
-        /// empty username, results in error message.
-        /// </summary>
         [Test]
         public void Login_EmptyUsername_ErrorMessage()
         {
@@ -58,11 +50,6 @@ namespace DEV_9.Tests
             Assert.IsTrue(log.Count == 1);
         }
     
-
-        /// <summary>
-        /// Negative test for logging in:
-        /// empty password, results in error message.
-        /// </summary>
         [Test]
         public void Login_EmptyPassword_ErrorMessage()
         {
@@ -73,28 +60,18 @@ namespace DEV_9.Tests
             Assert.IsTrue(log.Count == 1);
         }
 
-        /*/// <summary>
-        /// Negative test for logging in:
-        /// wrong id or password, results in error message.
-        /// </summary>
-        /// <param name="username">
-        /// The username.
-        /// </param>
-        /// <param name="password">
-        /// The password.
-        /// </param>
-        [TestCase("niksaff34", "testing")]
-        [TestCase("niksavi84", "testing")]
+
+        [TestCase("demitrodub", "test")]
+        [TestCase("test", "qwaqwaqwa11")]
         public void Login_WrongIdOrPassword_ErrorMessage(string username, string password)
         {
-            var homePage = new Page_Objects.MailLoginPage(this.driver);
-            homePage.Login_ExpectingError(username, password);
-            Assert.AreEqual("Неверное имя или пароль", homePage.ErrorMessage.Text);
-        }*/
+            var loginPage = new Page_Objects.MailLoginPage(Driver);
+            loginPage.LoginAs(username, password);
+            //Wait.Until(t => Driver.FindElements(By.XPath("//div[text() = 'Неверное имя или пароль'")).Any());
+            var log = Driver.FindElements(By.XPath("//div[text() = 'Неверное имя или пароль'"));
+            Assert.IsTrue(log.Count == 1);
+        }
 
-        /// <summary>
-        /// Tear down: close the driver.
-        /// </summary>
         [TearDown]
         public void CloseBrowser()
         {

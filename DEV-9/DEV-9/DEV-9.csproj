@@ -53,16 +53,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Locators\Locator.cs" />
     <Compile Include="Locators\Mail\MailLoginPageLocators.cs" />
     <Compile Include="Locators\Mail\MailMainPageLocators.cs" />
-    <Compile Include="Locators\Mail\MailSenderLetterPageLocators.cs" />
+    <Compile Include="Locators\Mail\MailPersonalDataPageLocators.cs" />
+    <Compile Include="Locators\Mail\MailReadLetterPageLocators.cs" />
+    <Compile Include="Locators\Mail\MailSendLetterPageLocators.cs" />
     <Compile Include="Locators\Yandex\YandexLoginPageLocators.cs" />
     <Compile Include="Locators\Yandex\YandexMainPageLocators.cs" />
     <Compile Include="Locators\Yandex\YandexReadLetterPageLocators.cs" />
     <Compile Include="Page Objects\Mail\MailLoginPage.cs" />
     <Compile Include="Page Objects\Mail\MailMainPage.cs" />
-    <Compile Include="Page Objects\Mail\MailSenderLetterPage.cs" />
+    <Compile Include="Page Objects\Mail\MailPersonalDataPage.cs" />
+    <Compile Include="Page Objects\Mail\MailReadLetterPage.cs" />
+    <Compile Include="Page Objects\Mail\MailSendLetterPage.cs" />
     <Compile Include="Page Objects\Yandex\YandexLoginPage.cs" />
     <Compile Include="Page Objects\Yandex\YandexMainPage.cs" />
     <Compile Include="Page Objects\Yandex\YandexReadLetterPage.cs" />

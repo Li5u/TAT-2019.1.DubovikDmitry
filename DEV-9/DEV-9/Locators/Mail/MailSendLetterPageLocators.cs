@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DEV_9.Locators.Mail
+﻿namespace DEV_9.Locators.Mail
 {
-    public class MailSenderLetterPageLocators : Locator
+    /// <summary>
+    /// Class with locators for mail.ru send letter page.
+    /// </summary>
+    public class MailSendLetterPageLocators 
     {
         public string RecepientLocator { get; } = "//textarea[@tabindex = '4']";
         public string SwitcherToFrameLocator { get; } = "//tr[@class = 'mceFirst mceLast']//iframe";

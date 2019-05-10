@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace DEV_9.Page_Objects.Yandex
 {
+    /// <summary>
+    /// Class for yandex read letter page.
+    /// </summary>
     class YandexReadLetterPage
     {
         IWebDriver Driver { get; }
@@ -16,6 +16,10 @@ namespace DEV_9.Page_Objects.Yandex
         IWebElement ReplyButton { get; set; }
         Locators.Yandex.YandexReadLetterPageLocators Locator { get; }
 
+        /// <summary>
+        /// Class constuctor initializes fields.
+        /// </summary>
+        /// <param name="driver"></param>
         public YandexReadLetterPage(IWebDriver driver)
         {
             this.Driver = driver;
@@ -23,33 +27,55 @@ namespace DEV_9.Page_Objects.Yandex
             this.Locator = new Locators.Yandex.YandexReadLetterPageLocators();
         }
 
+        /// <summary>
+        /// Clicks on reply button.
+        /// </summary>
+        /// <returns></returns>
         public YandexReadLetterPage ClickReplyButton()
         {
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.ReplyButtonLocator)).Any());
             ReplyButton = Driver.FindElement(By.XPath(Locator.ReplyButtonLocator));
             ReplyButton.Click();
+
             return this;
         }
 
+        /// <summary>
+        /// Fills text field.
+        /// </summary>
+        /// <param name="answer">text of the message to answer</param>
+        /// <returns></returns>
         public YandexReadLetterPage TypeReplyText(string answer)
         {
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.TextFieldLocator)).Any());
             Driver.FindElement(By.XPath(Locator.TextFieldLocator)).SendKeys(answer);
+
             return this;
         }
 
+        /// <summary>
+        /// Clicks on send reply button.
+        /// </summary>
+        /// <returns></returns>
         public YandexReadLetterPage SendReply()
         {
             Wait.Until(t => Driver.FindElements(By.XPath(Locator.SendReplyButtonLocator)).Any());
             Driver.FindElement(By.XPath(Locator.SendReplyButtonLocator)).Click();
+
             return this;
         }
 
+        /// <summary>
+        /// Sends reply to the letter.
+        /// </summary>
+        /// <param name="answer">Text of the answer</param>
+        /// <returns></returns>
         public YandexReadLetterPage ReplyToTheLetter(string answer)
         {
             ClickReplyButton();
             TypeReplyText(answer);
             SendReply();
+
             return this;
         }
     }
