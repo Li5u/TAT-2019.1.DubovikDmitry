@@ -69,7 +69,7 @@
     <Compile Include="Page Objects\Yandex\YandexLoginPage.cs" />
     <Compile Include="Page Objects\Yandex\YandexMainPage.cs" />
     <Compile Include="Page Objects\Yandex\YandexReadLetterPage.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\MailLoginTests.cs" />
   </ItemGroup>
