@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CarsStock>
+  <car name="Ford Focus" brand="Ford" model="Focus">
+    <count>10</count>
+    <price>10000</price>
+  </car>
+  <car name="Ford Mustang" brand="Ford" model="Mustang">
+    <count>3</count>
+    <price>30000</price>
+  </car>
+  <car name="Audi a8" brand="Audi" model="a8">
+    <count>7</count>
+    <price>15000</price>
+  </car>
+  <car name="BMW X3" brand="BMW" model="X3">
+    <count>15</count>
+    <price>12000</price>
+  </car>
+</CarsStock>
