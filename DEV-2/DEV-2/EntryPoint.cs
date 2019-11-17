@@ -19,8 +19,12 @@ namespace DEV_2
             try
             {
                 var converter = new LetterObjectConverter();
-                var transcriptionSpecialist = new TranscriptionMaker(converter.ConverStringToLetterObjectList(args[0]));
-                converter.DisplayTranscription(transcriptionSpecialist.MakeTranscription());               
+                var transcriptionMaker = new TranscriptionMaker(converter.ConverStringToLetterObjectList("молоко+"));
+                transcriptionMaker.ReplaceUnstressedO();
+                Console.WriteLine("малако"==converter.DisplayTranscription(transcriptionMaker.incertedString).ToString());
+                //var converter = new LetterObjectConverter();
+                //var transcriptionSpecialist = new TranscriptionMaker(converter.ConverStringToLetterObjectList(args[0]));
+                //Console.WriteLine(converter.DisplayTranscription(transcriptionSpecialist.MakeTranscription()));               
             }
 
             catch (Exception ex)

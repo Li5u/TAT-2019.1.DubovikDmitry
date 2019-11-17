@@ -8,7 +8,7 @@ namespace DEV_2
     /// <summary>
     /// This class can convert string to List of Letter objects.
     /// </summary>
-    class LetterObjectConverter
+    public class LetterObjectConverter
     {
         private readonly string[] _vowels = { "а", "о", "у", "ы", "э", "я", "е", "ё", "ю", "и" };
         private readonly string[] _consonants = { "б", "в", "г", "д", "й", "ж", "з", "к", "л", "м", "н",
@@ -17,32 +17,35 @@ namespace DEV_2
         private int counterOfStressedVowels = 0; //This field is using to check stressed vowels in recieved string.
 
         /// <summary>
-        /// This method converts all stressed vowels to upper registry.
+        /// his method converts all stressed vowels to upper registry.
         /// </summary>
-        /// <param name="receievedString"></param>
-        private void UpperStressedVowel(StringBuilder receievedString)
-        {       
-            for (int i = 1; i < receievedString.Length; i++)
+        /// <param name="recievedString"></param>
+        /// <returns>String with upper stressed vowels.</returns>D:\Work\TAT-2019\DEV-2\DEV-2\LetterObjectConverter.cs
+        public StringBuilder UpperStressedVowel(StringBuilder recievedString)
+        {
+            var stringToReturn = recievedString;
+
+            for (int i = 1; i < stringToReturn.Length; i++)
             {
-                if ((receievedString[i] == '+' && receievedString[i - 1] != 'ё'))
+                if ((stringToReturn[i] == '+' && stringToReturn[i - 1] != 'ё'))
                 {
-                    receievedString.Replace(receievedString[i - 1].ToString(), receievedString[i - 1].ToString().ToUpper(), i - 1, 1);
+                    stringToReturn.Replace(stringToReturn[i - 1].ToString(), stringToReturn[i - 1].ToString().ToUpper(), i - 1, 1);
                     counterOfStressedVowels++;
                 }
             }
 
-            for (int i = 0; i < receievedString.Length; i++)
+            for (int i = 0; i < stringToReturn.Length; i++)
             {
-                if (receievedString[i] == 'ё')
+                if (stringToReturn[i] == 'ё')
                 {
-                    receievedString.Replace(receievedString[i].ToString(), receievedString[i].ToString().ToUpper(), i, 1);
+                    stringToReturn.Replace(stringToReturn[i].ToString(), stringToReturn[i].ToString().ToUpper(), i, 1);
                     counterOfStressedVowels++;
                 }
 
                 //Delete '+' symbol from string.
-                if (receievedString[i] == '+')
+                if (stringToReturn[i] == '+')
                 {
-                    receievedString.Remove(i, 1);
+                    stringToReturn.Remove(i, 1);
                 }
             }
 
@@ -58,12 +61,12 @@ namespace DEV_2
                 int counterOfVowels = 0;
                 string[] vowels = { "а", "о", "у", "ы", "э", "я", "е", "ё", "ю", "и" };
 
-                for (int i = 0; i < receievedString.Length; i++)
+                for (int i = 0; i < stringToReturn.Length; i++)
                 {
-                    if(vowels.Contains(receievedString[i].ToString()))
+                    if(vowels.Contains(stringToReturn[i].ToString()))
                     {
                         counterOfVowels++;
-                        receievedString.Replace(receievedString[i].ToString(), receievedString[i].ToString().ToUpper(), i, 1);
+                        stringToReturn.Replace(stringToReturn[i].ToString(), stringToReturn[i].ToString().ToUpper(), i, 1);
                     }
                 }
 
@@ -72,6 +75,8 @@ namespace DEV_2
                     throw new Exception ("Stressed vowel must be marked with '+'!");
                 }
             }
+
+            return stringToReturn;
         }
 
         /// <summary>
@@ -79,10 +84,9 @@ namespace DEV_2
         /// </summary>
         /// <param name="recievedWord"></param>
         /// <returns>List of Letter objects</returns>
-        public List<Letter> ConverStringToLetterObjectList(string recievedWord)
+         public List<Letter> ConverStringToLetterObjectList(string recievedWord)
         {
-            var recievedString = new StringBuilder(recievedWord);
-            UpperStressedVowel(recievedString);
+            var recievedString = UpperStressedVowel(new StringBuilder(recievedWord));
             var letters = new List<Letter> { };
 
             for (int i = 0; i < recievedString.Length; i++) 
@@ -91,14 +95,17 @@ namespace DEV_2
                 {
                     letters.Add(new Consonant(recievedString[i]));
                 }
+
                 else if (_vowels.Contains(recievedString[i].ToString().ToLower()))
                 {
                     letters.Add(new Vowel(recievedString[i]));
                 }
+
                 else if(_soundless.Contains(recievedString[i].ToString().ToLower()))
                 {
                     letters.Add(new Soundless(recievedString[i]));
                 }
+
                 else
                 {
                     throw new Exception("Wrong symbol!");
@@ -109,21 +116,23 @@ namespace DEV_2
         }
 
         /// <summary>
-        /// his method displays transcription to the console.
+        /// This method displays transcription to the console.
         /// </summary>
         /// <remarks>
         /// All Letter objects has field 'sound'.
         /// This method combines all sounds and displays them to console.
         /// </remarks>
-        /// <param name="incecredString">List of Letter objects</param>
-        public void DisplayTranscription(List<Letter> incecredString)
+        /// <param name="incertedString">List of Letter objects</param>
+        public StringBuilder DisplayTranscription(List<Letter> incertedString)
         {
             var transcription = new StringBuilder();
-            foreach (var letter in incecredString)
+
+            foreach (var letter in incertedString)
             {
                 transcription.Append(letter.Sound);
             }
-            Console.WriteLine(transcription);
+
+            return transcription;
         }
     }
 }

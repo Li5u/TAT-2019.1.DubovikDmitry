@@ -5,9 +5,9 @@ namespace DEV_2
     /// <summary>
     /// This class makes transcription.
     /// </summary>
-    class TranscriptionMaker
+    public class TranscriptionMaker
     {
-        private List<Letter> incertedString;
+        public List<Letter> incertedString;
         public TranscriptionMaker(List<Letter> incertedString)
         {
             this.incertedString = incertedString;
@@ -29,7 +29,7 @@ namespace DEV_2
         /// <summary>
         /// This method replaces unstressed 'o' with 'a'.
         /// </summary>
-        private void ReplaceUnstressedO()
+        public void ReplaceUnstressedO()
         {
             foreach(Letter letter in incertedString)
             {
@@ -48,7 +48,7 @@ namespace DEV_2
         /// <summary>
         /// This method changes sound of consonant before yoted vowels.
         /// </summary>
-        private void SoftenConsonants()
+        public void SoftenConsonants()
         {
             for (int i = 1; i < incertedString.Count; i++) 
             {
@@ -68,7 +68,7 @@ namespace DEV_2
         /// <summary>
         /// This method changes sound of yoted vowels after another vowels.
         /// </summary>
-        private void ShowYotedVowelsPronunciation()
+        public void ShowYotedVowelsPronunciation()
         {
             for (int i = 1; i < incertedString.Count; i++)
             {
@@ -96,7 +96,7 @@ namespace DEV_2
         /// <summary>
         /// This method changes sound of deaf and ringing consonats.
         /// </summary>
-        private void VoiceAndDevoise()
+        public void VoiceAndDevoise()
         {
             for (int i = 1; i < incertedString.Count; i++)
             {

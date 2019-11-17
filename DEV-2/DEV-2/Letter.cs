@@ -3,7 +3,7 @@
     /// <summary>
     /// This class keeps all information about letters.
     /// </summary>
-    class Letter
+    public class Letter
     {
         internal string Value { get; set; }
         internal string Sound { get; set; }
